@@ -1,8 +1,7 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useCallback } from "react";
 import SearchComponent from "./Components/SearchComponent";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-import * as Font from "expo-font";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
