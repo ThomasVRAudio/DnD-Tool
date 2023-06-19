@@ -1,20 +1,28 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useState, useCallback } from "react";
+import SearchComponent from "./Components/SearchComponent";
+import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
+import * as Font from "expo-font";
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+  const [fontsLoaded] = useFonts({
+    "open-sans-basic": require("./assets/fonts/OpenSans-Bold.ttf"),
+    "Montserrat-Italic": require("./assets/fonts/Montserrat-Italic-VariableFont_wght.ttf"),
+    "DND-Title": require("./assets/fonts/DUNGRG.ttf"),
+    "Montserrat-Bold": require("./assets/fonts/Montserrat-VariableFont_wght.ttf"),
+    "Serif-Light": require("./assets/fonts/IBMPlexSerif-Medium.ttf"),
+    "Serif-Light-Italic": require("./assets/fonts/IBMPlexSerif-MediumItalic.ttf"),
+  });
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
+  return <SearchComponent />;
+}
