@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, Modal, FlatList } from "react-native";
+import { ScrollView, Modal } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Colors from "../constants/Colors";
 import { StyleSheet } from "react-native";
@@ -6,6 +6,7 @@ import Item from "./Item";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useEffect, useRef, useState } from "react";
 import EditTextPopup from "./EditTextPopup";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const ItemsScreen = () => {
   const DATA = [
@@ -14,6 +15,18 @@ const ItemsScreen = () => {
       desc: "",
     },
   ];
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = async () => {
+    const jsonValue = await AsyncStorage.getItem("itemList");
+
+    if (jsonValue != null) {
+      setItemList(JSON.parse(jsonValue));
+    }
+  };
 
   const [item, setItem] = useState(DATA);
   const [itemList, setItemList] = useState([]);
@@ -53,6 +66,8 @@ const ItemsScreen = () => {
     newItemList[editIndex].title = inputTitleText;
     newItemList[editIndex].desc = inputDescriptionText;
     setItemList(newItemList);
+
+    AsyncStorage.setItem("itemList", JSON.stringify(itemList));
   };
 
   return (
