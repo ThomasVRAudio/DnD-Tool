@@ -1,7 +1,10 @@
 import React, { useCallback } from "react";
-import SearchComponent from "./Components/SearchComponent";
+import SearchScreen from "./Components/SearchScreen";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
+import { NavigationContainer } from "@react-navigation/native";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import ItemsScreen from "./Components/ItemsScreen";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -23,5 +26,14 @@ export default function App() {
     return null;
   }
 
-  return <SearchComponent />;
+  const Drawer = createDrawerNavigator();
+
+  return (
+    <NavigationContainer>
+      <Drawer.Navigator initialRouteName="Items">
+        <Drawer.Screen name="Search Spells" component={SearchScreen} />
+        <Drawer.Screen name="Items" component={ItemsScreen} />
+      </Drawer.Navigator>
+    </NavigationContainer>
+  );
 }

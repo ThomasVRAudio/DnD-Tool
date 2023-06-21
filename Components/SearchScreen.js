@@ -9,8 +9,9 @@ import {
 import React, { useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import Colors from "../constants/Colors";
 
-const SearchComponent = () => {
+const SearchScreen = () => {
   const [data, setData] = useState([]);
   const [search, setSearch] = useState("");
 
@@ -31,7 +32,7 @@ const SearchComponent = () => {
 
   return (
     <LinearGradient
-      colors={["#682F2F", "#efdfbb", "#efdfbb", "#e7c9a9"]}
+      colors={Colors.parchmentGradient}
       style={styles.container}
     >
       <SafeAreaView style={styles.container}>
@@ -51,8 +52,8 @@ const SearchComponent = () => {
           ></Ionicons>
         </View>
 
-        <Text style={styles.title}>{data.name}</Text>
         <ScrollView showsVerticalScrollIndicator={false}>
+          <Text style={styles.title}>{data.name}</Text>
           <Text style={styles.description}>
             {data.desc !== undefined &&
               String(data.desc).replace(/\./g, ".\n\n")}
@@ -63,14 +64,14 @@ const SearchComponent = () => {
   );
 };
 
-export default SearchComponent;
+export default SearchScreen;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     AlignItems: "center",
     padding: 10,
-    paddingTop: 50,
+    paddingTop: 20,
   },
   title: {
     paddingTop: 20,
@@ -84,7 +85,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: "Serif-Light-Italic",
     fontWeight: 600,
-    color: "#030303",
+    color: Colors.textColor,
   },
   input: {
     fontSize: 20,
@@ -99,6 +100,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
     elevation: 10,
+    marginBottom: 20,
   },
   searchIcon: { flex: 1 },
   test: {
