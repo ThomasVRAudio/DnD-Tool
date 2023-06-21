@@ -5,6 +5,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 
 const EditTextPopup = ({
   onPressSaveEdit,
+  onPressDelete,
   titleText,
   setTitleText,
   descText,
@@ -30,13 +31,20 @@ const EditTextPopup = ({
           placeholder="Description"
         ></TextInput>
       </View>
-      <Ionicons
-        style={styles.submit}
-        name="return-down-back-outline"
-        size={20}
-        borderWidth={1}
-        onPress={() => onPressSaveEdit()}
-      />
+      <View style={styles.buttonsContainer}>
+        <Ionicons
+          style={styles.button}
+          name="trash"
+          size={60}
+          onPress={() => onPressDelete()}
+        />
+        <Ionicons
+          style={styles.button}
+          name="checkmark"
+          size={60}
+          onPress={() => onPressSaveEdit()}
+        />
+      </View>
     </>
   );
 };
@@ -45,7 +53,7 @@ export default EditTextPopup;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 5,
     AlignItems: "flex-start",
     padding: 5,
     margin: 10,
@@ -68,8 +76,16 @@ const styles = StyleSheet.create({
     textAlign: "left",
     fontFamily: "Serif-Light-Italic",
   },
-  submit: {
-    textAlign: "right",
-    padding: 10,
+  button: {
+    margin: 20,
+    borderWidth: 2,
+    borderRadius: 20,
+    textAlign: "center",
+  },
+  buttonsContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-evenly",
+    flex: 1,
   },
 });

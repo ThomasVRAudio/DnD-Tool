@@ -70,6 +70,18 @@ const ItemsScreen = () => {
     AsyncStorage.setItem("itemList", JSON.stringify(itemList));
   };
 
+  const onPressDelete = () => {
+    setModalIsVisible(false);
+    let newItemList = [...itemList];
+    newItemList.splice(editIndex, 1);
+
+    setItemList(newItemList);
+  };
+
+  useEffect(() => {
+    AsyncStorage.setItem("itemList", JSON.stringify(itemList));
+  }, [itemList]);
+
   return (
     <LinearGradient colors={Colors.parchmentGradient} style={styles.container}>
       <ScrollView>
@@ -95,6 +107,7 @@ const ItemsScreen = () => {
           descText={inputDescriptionText}
           setDescText={setInputDescriptionText}
           onPressSaveEdit={() => onPressSaveEdit()}
+          onPressDelete={() => onPressDelete()}
         />
       </Modal>
       <Ionicons
