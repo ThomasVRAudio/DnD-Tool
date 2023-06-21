@@ -1,6 +1,5 @@
 import { View, Text, StyleSheet } from "react-native";
 import Colors from "../constants/Colors";
-import TouchableHighlight from "react-native-gesture-handler";
 
 const Item = ({ desc, title, press }) => {
   return (

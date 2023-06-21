@@ -1,34 +1,33 @@
 import { Text, View, StyleSheet } from "react-native";
 import Colors from "../constants/Colors";
 import { TextInput } from "react-native-gesture-handler";
-import { useState, useEffect } from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-const EditTextPopup = ({ initText, onSubmitChanges }) => {
-  const [text, setText] = useState("");
-
-  useEffect(() => {
-    setText(initText);
-  }, []);
-
+const EditTextPopup = ({
+  onPressSaveEdit,
+  titleText,
+  setTitleText,
+  descText,
+  setDescText,
+}) => {
   return (
     <>
       <View style={styles.container}>
         <TextInput
           style={styles.title}
-          onSubmitEditing={() => {
-            //onSubmitChanges(text);
-          }}
-          onChangeText={(newText) => {
-            setText(newText);
-          }}
-          defaultValue={text[0]}
+          onChangeText={(text) => setTitleText(text)}
+          placeholder="Title"
+          defaultValue={titleText}
+          editable={true}
+          multiline={true}
         ></TextInput>
         <TextInput
           style={styles.desc}
-          onSubmitEditing={() => onSubmitChanges(text)}
-          onChangeText={(newText) => setText(newText)}
-          defaultValue={text[1]}
+          onChangeText={(text) => setDescText(text)}
+          defaultValue={descText}
+          editable={true}
+          multiline={true}
+          placeholder="Description"
         ></TextInput>
       </View>
       <Ionicons
@@ -36,8 +35,7 @@ const EditTextPopup = ({ initText, onSubmitChanges }) => {
         name="return-down-back-outline"
         size={20}
         borderWidth={1}
-        onPress={() => onSubmitChanges(text)}
-        onChangeText={setText}
+        onPress={() => onPressSaveEdit()}
       />
     </>
   );
