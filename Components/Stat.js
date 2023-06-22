@@ -1,10 +1,36 @@
-import { Text, StyleSheet, View } from "react-native";
+import { Text, StyleSheet, View, TextInput } from "react-native";
+import Colors from "../constants/Colors";
+import { useState, useEffect } from "react";
 
-const Stat = ({ changeSpellSlots, spellSlots, index }) => {
+const Stat = ({
+  changeSpellSlots,
+  spellSlots,
+  index,
+  maxSlots,
+  changeMaxSlots,
+}) => {
+  const [maxValue, setMaxValue] = useState("");
+
+  useEffect(() => {
+    setMaxValue(String(maxSlots[index][1]));
+  }, [maxSlots]);
+
+  const clearMaxValue = () => {
+    setMaxValue("");
+  };
+
+  const checkEmpty = () => {
+    if (maxValue === "") {
+      changeMaxSlots({ text: "0", index: index });
+    }
+  };
+
   return (
     <>
       <View style={styles.container}>
-        <Text style={spellSlots[index] !== 0 ? styles.level : styles.levelzero}>
+        <Text
+          style={spellSlots[index][0] !== 0 ? styles.level : styles.levelzero}
+        >
           Lv. {index + 1}
         </Text>
         <View style={styles.counterContainer}>
@@ -18,10 +44,10 @@ const Stat = ({ changeSpellSlots, spellSlots, index }) => {
           </Text>
           <Text
             style={
-              spellSlots[index] !== 0 ? styles.counter : styles.counterzero
+              spellSlots[index][0] !== 0 ? styles.counter : styles.counterzero
             }
           >
-            {spellSlots[index]}
+            {spellSlots[index][0]}
           </Text>
           <Text
             style={styles.buttonRight}
@@ -31,6 +57,20 @@ const Stat = ({ changeSpellSlots, spellSlots, index }) => {
           >
             +
           </Text>
+          <Text>max: </Text>
+          <TextInput
+            style={styles.max}
+            defaultValue={maxValue}
+            onChangeText={(text) =>
+              changeMaxSlots({ text: text, index: index })
+            }
+            maxLength={2}
+            keyboardType="numeric"
+            onFocus={() => clearMaxValue()}
+            onSubmitEditing={() => {
+              checkEmpty();
+            }}
+          ></TextInput>
         </View>
       </View>
     </>
@@ -50,7 +90,7 @@ const styles = StyleSheet.create({
     padding: 5,
     paddingHorizontal: 8,
     margin: 10,
-    backgroundColor: "#B89669",
+    backgroundColor: Colors.button,
     fontSize: 20,
     borderWidth: 1,
     elevation: 5,
@@ -60,7 +100,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 15,
     padding: 5,
     margin: 10,
-    backgroundColor: "#B89669",
+    backgroundColor: Colors.button,
     fontSize: 20,
     borderWidth: 1,
     elevation: 5,
@@ -72,7 +112,7 @@ const styles = StyleSheet.create({
   counterzero: {
     fontFamily: "Serif-Light",
     fontSize: 30,
-    color: "#00000038",
+    color: Colors.textGrayed,
   },
   counterContainer: {
     flexDirection: "row",
@@ -94,6 +134,9 @@ const styles = StyleSheet.create({
   levelzero: {
     fontFamily: "Serif-Light-Italic",
     fontSize: 20,
-    color: "#0000005B",
+    color: Colors.textGrayed,
+  },
+  max: {
+    fontFamily: "Serif-Light",
   },
 });

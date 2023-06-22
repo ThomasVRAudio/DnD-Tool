@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: "Serif-Light-Italic",
     fontWeight: 600,
-    color: Colors.textColor,
+    color: Colors.text,
   },
   input: {
     fontSize: 20,

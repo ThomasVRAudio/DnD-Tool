@@ -9,7 +9,17 @@ import Colors from "../constants/Colors";
 import { LinearGradient } from "expo-linear-gradient";
 
 const TempStatsScreen = () => {
-  const slotLevels = [3, 0, 0, 0, 0, 0, 0, 0, 0];
+  const slotLevels = [
+    [1, 0],
+    [1, 0],
+    [1, 0],
+    [1, 0],
+    [1, 0],
+    [1, 0],
+    [1, 0],
+    [1, 0],
+    [1, 0],
+  ];
   const [spellSlots, setSpellSlots] = useState(slotLevels);
 
   useEffect(() => {
@@ -26,10 +36,15 @@ const TempStatsScreen = () => {
 
   const changeSpellSlots = (props) => {
     let arrayCopy = [...spellSlots];
-    arrayCopy[props.index] += props.number;
+    arrayCopy[props.index][0] += props.number;
+    arrayCopy[props.index][0] =
+      arrayCopy[props.index][0] < 0 ? 0 : arrayCopy[props.index][0];
+    setSpellSlots(arrayCopy);
+  };
 
-    arrayCopy[props.index] =
-      arrayCopy[props.index] < 0 ? 0 : arrayCopy[props.index];
+  const changeMaxSlots = ({ text, index }) => {
+    let arrayCopy = [...spellSlots];
+    arrayCopy[index][1] = text;
     setSpellSlots(arrayCopy);
   };
 
@@ -49,6 +64,8 @@ const TempStatsScreen = () => {
                 spellSlots={spellSlots}
                 changeSpellSlots={changeSpellSlots}
                 index={index}
+                maxSlots={spellSlots}
+                changeMaxSlots={changeMaxSlots}
               ></Stat>
             );
           })}
@@ -62,7 +79,6 @@ export default TempStatsScreen;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#665757",
     flex: 1,
     padding: 10,
     alignItems: "center",
@@ -72,5 +88,11 @@ const styles = StyleSheet.create({
     fontFamily: "DND-Title",
     fontSize: 50,
     alignSelf: "center",
+    backgroundColor: Colors.card,
+    borderWidth: 1,
+    borderRadius: 5,
+    elevation: 5,
+    padding: 5,
+    paddingHorizontal: 50,
   },
 });
