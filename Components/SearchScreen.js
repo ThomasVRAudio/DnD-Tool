@@ -10,6 +10,7 @@ import React, { useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Colors from "../constants/Colors";
+import SpellData from "./SpellData";
 
 const SearchScreen = () => {
   const [data, setData] = useState([]);
@@ -21,9 +22,26 @@ const SearchScreen = () => {
 
   const url = `https://www.dnd5eapi.co/api/spells/${search
     .toLocaleLowerCase()
-    .replace(/ /g, "-")}/`;
+    .trimEnd()
+    .replace(/ /g, "-")
+    .replace(/'/g, "-")}/`;
 
   const confirm = () => {
+    let localData = SpellData.filter((obj) => {
+      return (
+        obj.index ===
+        search
+          .toLocaleLowerCase()
+          .trimEnd()
+          .replace(/ /g, "-")
+          .replace(/'/g, "-")
+      );
+    });
+    if (localData.length !== 0) {
+      setData(localData[0]);
+      return;
+    }
+
     fetch(url)
       .then((resp) => resp.json())
       .then((json) => setData(json))
@@ -66,11 +84,15 @@ const SearchScreen = () => {
             <Text style={styles.components}>{data.range}</Text>
           </View>
           <View style={styles.components}>
-            <Text style={styles.componentsTitle}>{data.desc && "Components: "}</Text>
+            <Text style={styles.componentsTitle}>
+              {data.desc && "Components: "}
+            </Text>
             <Text style={styles.components}>{data.components}</Text>
           </View>
           <View style={styles.components}>
-            <Text style={styles.componentsTitle}>{data.desc && "Duration: "}</Text>
+            <Text style={styles.componentsTitle}>
+              {data.desc && "Duration: "}
+            </Text>
             <Text style={styles.components}>{data.duration}</Text>
           </View>
           <Text style={styles.description}>
