@@ -101,7 +101,10 @@ const SpellSlotsScreen = () => {
   return (
     <LinearGradient colors={Colors.parchmentGradient} style={styles.container}>
       <View style={styles.container}>
-        <ScrollView style={styles.spellsContainer}>
+        <ScrollView
+          style={styles.spellsContainer}
+          showsVerticalScrollIndicator={false}
+        >
           {spells.map((x, index) => {
             return (
               <Spell

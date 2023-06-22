@@ -11,7 +11,11 @@ const Spell = ({ data, onPressDelete, index }) => {
   };
 
   return (
-    <ScrollView style={styles.container} onTouchEnd={() => showDetails()}>
+    <ScrollView
+      style={styles.container}
+      onTouchEnd={() => showDetails()}
+      showsVerticalScrollIndicator={false}
+    >
       <View style={detailed ? styles.upperTextDetailed : styles.upperText}>
         <Text style={styles.title}>{data && data.name}</Text>
         <View style={styles.rightTop}>
@@ -77,7 +81,7 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: "Serif-Bold",
     fontSize: 20,
-    flex: 1
+    flex: 1,
   },
   level: {
     fontFamily: "Serif-Light",
