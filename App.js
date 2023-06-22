@@ -9,12 +9,11 @@ import TempStatsScreen from "./Components/TempStatsScreen";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
-    "open-sans-basic": require("./assets/fonts/OpenSans-Bold.ttf"),
-    "Montserrat-Italic": require("./assets/fonts/Montserrat-Italic-VariableFont_wght.ttf"),
     "DND-Title": require("./assets/fonts/DUNGRG.ttf"),
-    "Montserrat-Bold": require("./assets/fonts/Montserrat-VariableFont_wght.ttf"),
     "Serif-Light": require("./assets/fonts/IBMPlexSerif-Medium.ttf"),
     "Serif-Light-Italic": require("./assets/fonts/IBMPlexSerif-MediumItalic.ttf"),
+    "Serif-Bold": require("./assets/fonts/IBMPlexSerif-SemiBold.ttf"),
+    "Serif-Bold-Italic": require("./assets/fonts/IBMPlexSerif-SemiBoldItalic.ttf"),
   });
 
   const onLayoutRootView = useCallback(async () => {

@@ -31,10 +31,7 @@ const SearchScreen = () => {
   };
 
   return (
-    <LinearGradient
-      colors={Colors.parchmentGradient}
-      style={styles.container}
-    >
+    <LinearGradient colors={Colors.parchmentGradient} style={styles.container}>
       <SafeAreaView style={styles.container}>
         <View style={styles.textInputContainer}>
           <TextInput
@@ -54,10 +51,38 @@ const SearchScreen = () => {
 
         <ScrollView showsVerticalScrollIndicator={false}>
           <Text style={styles.title}>{data.name}</Text>
+          <Text style={styles.level}>
+            {data.desc && "Level " + data.level + " " + data.school.name}
+          </Text>
+
+          <View style={styles.components}>
+            <Text style={styles.componentsTitle}>
+              {data.desc && "Casting Time: "}
+            </Text>
+            <Text style={styles.components}>{data.casting_time}</Text>
+          </View>
+          <View style={styles.components}>
+            <Text style={styles.componentsTitle}>{data.desc && "Range: "}</Text>
+            <Text style={styles.components}>{data.range}</Text>
+          </View>
+          <View style={styles.components}>
+            <Text style={styles.componentsTitle}>{data.desc && "Components: "}</Text>
+            <Text style={styles.components}>{data.components}</Text>
+          </View>
+          <View style={styles.components}>
+            <Text style={styles.componentsTitle}>{data.desc && "Duration: "}</Text>
+            <Text style={styles.components}>{data.duration}</Text>
+          </View>
           <Text style={styles.description}>
             {data.desc !== undefined &&
               String(data.desc).replace(/\./g, ".\n\n")}
           </Text>
+          <Text style={styles.mediumTitle}>
+            {data.higher_level !== undefined &&
+              data.higher_level.length !== 0 &&
+              "Higher Level: "}
+          </Text>
+          <Text style={styles.description}>{data.higher_level}</Text>
         </ScrollView>
       </SafeAreaView>
     </LinearGradient>
@@ -82,7 +107,7 @@ const styles = StyleSheet.create({
   description: {
     textAlign: "justify",
     paddingTop: 20,
-    fontSize: 18,
+    fontSize: 15,
     fontFamily: "Serif-Light-Italic",
     fontWeight: 600,
     color: Colors.text,
@@ -103,8 +128,29 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   searchIcon: { flex: 1 },
-  test: {
+  mediumTitle: {
     fontSize: 40,
     fontFamily: "DND-Title",
+  },
+  components: {
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    alignItems: "center",
+    fontFamily: "Serif-Light",
+    fontSize: 15,
+    paddingBottom: 2,
+  },
+  componentsTitle: {
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    alignItems: "center",
+    fontFamily: "Serif-Bold",
+    fontSize: 15,
+    paddingBottom: 2,
+  },
+  level: {
+    fontFamily: "Serif-Light-Italic",
+    fontSize: 18,
+    color: "#03030373",
   },
 });

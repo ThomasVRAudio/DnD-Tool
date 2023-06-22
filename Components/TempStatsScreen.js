@@ -7,6 +7,7 @@ import Stat from "./Stat";
 import { ScrollView } from "react-native-gesture-handler";
 import Colors from "../constants/Colors";
 import { LinearGradient } from "expo-linear-gradient";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 const TempStatsScreen = () => {
   const slotLevels = [
@@ -52,11 +53,29 @@ const TempStatsScreen = () => {
     AsyncStorage.setItem("spellSlots", JSON.stringify(spellSlots));
   }, [spellSlots]);
 
+  const setToMax = () => {
+    let arrayCopy = [...spellSlots];
+    arrayCopy.forEach((element) => {
+      for (let index = 0; index < arrayCopy.length; index++) {
+        arrayCopy[index][0] = parseInt(arrayCopy[index][1]);
+      }
+    });
+
+    setSpellSlots(arrayCopy);
+  };
+
   return (
     <LinearGradient colors={Colors.basicBackground} style={styles.container}>
       <SafeAreaView>
         <ScrollView>
-          <Text style={styles.stat}>Spell Slots:</Text>
+          <View style={styles.titleContainer}>
+            <Text style={styles.stat}>Spell Slots:</Text>
+            <Ionicons
+              name="reload-circle"
+              size={60}
+              onPress={() => setToMax()}
+            />
+          </View>
           {spellSlots.map((x, index) => {
             return (
               <Stat
@@ -94,5 +113,9 @@ const styles = StyleSheet.create({
     elevation: 5,
     padding: 5,
     paddingHorizontal: 50,
+  },
+  titleContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
 });
