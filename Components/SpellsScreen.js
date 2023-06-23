@@ -105,15 +105,44 @@ const SpellSlotsScreen = () => {
           style={styles.spellsContainer}
           showsVerticalScrollIndicator={false}
         >
+          <Text style={styles.containerTitle}>Traits</Text>
           {spells.map((x, index) => {
-            return (
-              <Spell
-                data={spells[index]}
-                key={index}
-                index={index}
-                onPressDelete={onPressDelete}
-              />
-            );
+            if (x.level === "Trait") {
+              return (
+                <Spell
+                  data={spells[index]}
+                  key={index}
+                  index={index}
+                  onPressDelete={onPressDelete}
+                />
+              );
+            }
+          })}
+          <Text style={styles.containerTitle}>Cantrips</Text>
+          {spells.map((x, index) => {
+            if (x.level === 0) {
+              return (
+                <Spell
+                  data={spells[index]}
+                  key={index}
+                  index={index}
+                  onPressDelete={onPressDelete}
+                />
+              );
+            }
+          })}
+          <Text style={styles.containerTitle}>Levels</Text>
+          {spells.map((x, index) => {
+            if (x.level >= 1) {
+              return (
+                <Spell
+                  data={spells[index]}
+                  key={index}
+                  index={index}
+                  onPressDelete={onPressDelete}
+                />
+              );
+            }
           })}
         </ScrollView>
         <View style={styles.searchContainer}>
@@ -130,7 +159,7 @@ const SpellSlotsScreen = () => {
               placeholder="Acid Arrow"
               placeholderTextColor={"#FFFFFF80"}
               onChangeText={updateSearch}
-              value={search} //used to be search
+              value={search}
               onSubmitEditing={confirm}
             ></TextInput>
           </View>
@@ -190,4 +219,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 90,
   },
   spellsContainer: { flex: 8 },
+  containerTitle: {
+    fontFamily: "Serif-Light-Italic",
+    color: "#00000091",
+    fontSize: 18,
+    width: "95%",
+    textAlign: "right",
+    paddingTop: 10,
+  },
 });
