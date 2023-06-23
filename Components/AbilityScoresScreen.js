@@ -32,7 +32,6 @@ const AbilityScoresScreen = () => {
     spellSaveDC: 0,
     proficiencyBonus: 0,
     spellAttack: 0,
-    level: 0,
   };
 
   const [data, setData] = useState(DATA);
@@ -100,7 +99,7 @@ const AbilityScoresScreen = () => {
 
   return (
     <LinearGradient style={styles.container} colors={Colors.basicBackground}>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.scroll}>
           <CharacterInfo data={data} confirm={onEditData} />
           <View style={styles.rowContainer}>
@@ -195,7 +194,6 @@ export default AbilityScoresScreen;
 
 const styles = StyleSheet.create({
   container: {
-    //alignItems: "center",
     padding: 20,
     flex: 1,
   },
