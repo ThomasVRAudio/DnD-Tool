@@ -32,12 +32,15 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Ability Scores">
+      <Drawer.Navigator initialRouteName="Character Info & Stats">
         <Drawer.Screen name="Search Spells" component={SearchScreen} />
         <Drawer.Screen name="Items" component={ItemsScreen} />
         <Drawer.Screen name="Spell Slots" component={SpellSlotsScreen} />
         <Drawer.Screen name="Spells" component={SpellsScreen} />
-        <Drawer.Screen name="Ability Scores" component={AbilityScoresScreen} />
+        <Drawer.Screen
+          name="Character Info & Stats"
+          component={AbilityScoresScreen}
+        />
       </Drawer.Navigator>
     </NavigationContainer>
   );
