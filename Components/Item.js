@@ -1,11 +1,14 @@
 import { View, Text, StyleSheet } from "react-native";
 import Colors from "../constants/Colors";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const Item = ({ desc, title, press }) => {
   return (
-    <View style={styles.container} onStartShouldSetResponder={press}>
-      <Text style={styles.title}>{title}</Text>
-      <Text style={styles.desc}>{desc}</Text>
+    <View style={styles.container}>
+      <TouchableOpacity onPress={press}>
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.desc}>{desc}</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -16,17 +19,17 @@ const styles = StyleSheet.create({
   container: {
     AlignItems: "flex-start",
     padding: 5,
-    margin: 10,
+    margin:5,
     backgroundColor: Colors.card,
     borderRadius: 8,
     elevation: 5,
     overflow: "visible",
-    borderWidth: 0.5,
+    borderWidth: 2,
     borderColor: Colors.text,
   },
   title: {
     color: Colors.text,
-    fontSize: 25,
+    fontSize: 20,
     textAlign: "left",
     fontFamily: "Serif-Light",
   },
