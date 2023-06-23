@@ -7,6 +7,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import ItemsScreen from "./Components/ItemsScreen";
 import SpellsScreen from "./Components/SpellsScreen";
 import SpellSlotsScreen from "./Components/SpellSlotsScreen";
+import AbilityScoresScreen from "./Components/AbilityScoresScreen";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -31,11 +32,12 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Spells">
+      <Drawer.Navigator initialRouteName="Ability Scores">
         <Drawer.Screen name="Search Spells" component={SearchScreen} />
         <Drawer.Screen name="Items" component={ItemsScreen} />
         <Drawer.Screen name="Spell Slots" component={SpellSlotsScreen} />
         <Drawer.Screen name="Spells" component={SpellsScreen} />
+        <Drawer.Screen name="Ability Scores" component={AbilityScoresScreen} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
