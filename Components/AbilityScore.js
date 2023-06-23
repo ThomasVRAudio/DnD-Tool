@@ -1,11 +1,31 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TextInput } from "react-native";
 import Colors from "../constants/Colors";
+import { useState } from "react";
+import { useEffect } from "react";
 
-const AbilityScore = ({ ability, value }) => {
+const AbilityScore = ({ ability, value, confirm }) => {
+  const [abilityValue, setAbilityValue] = useState(value);
+
+  useEffect(() => {
+    setAbilityValue(value);
+  }, [, value]);
+
+  const clearValue = () => {
+    setAbilityValue("");
+  };
+
   return (
     <View style={styles.abilityContainer}>
       <Text style={styles.ability}>{ability}</Text>
-      <Text style={styles.score}>{value}</Text>
+      <TextInput
+        style={styles.score}
+        defaultValue={String(abilityValue)}
+        onChangeText={(text) =>
+          confirm({ value: text, prop: String(ability).toLowerCase() })
+        }
+        keyboardType="numeric"
+        onFocus={() => clearValue()}
+      ></TextInput>
       <Text style={styles.score}>
         {(value >= 10 && "+") + Math.floor((value - 10) / 2)}
       </Text>
@@ -23,6 +43,7 @@ const styles = StyleSheet.create({
     fontFamily: "Serif-Light",
     paddingTop: 10,
     fontSize: 20,
+    textAlign: "center",
   },
   abilityContainer: {
     alignItems: "center",
