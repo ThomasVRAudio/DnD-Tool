@@ -1,6 +1,7 @@
 import { Text, StyleSheet, View, TextInput } from "react-native";
 import Colors from "../constants/Colors";
 import { useState, useEffect } from "react";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const Stat = ({
   changeSpellSlots,
@@ -34,14 +35,13 @@ const Stat = ({
           Lv. {index + 1}
         </Text>
         <View style={styles.counterContainer}>
-          <Text
-            style={styles.buttonLeft}
+          <TouchableOpacity
             onPress={() => {
               changeSpellSlots({ number: -1, index: index });
             }}
           >
-            -
-          </Text>
+            <Text style={styles.buttonLeft}>-</Text>
+          </TouchableOpacity>
           <Text
             style={
               spellSlots[index][0] !== 0 ? styles.counter : styles.counterzero
@@ -49,14 +49,13 @@ const Stat = ({
           >
             {spellSlots[index][0]}
           </Text>
-          <Text
-            style={styles.buttonRight}
+          <TouchableOpacity
             onPress={() => {
               changeSpellSlots({ number: 1, index: index });
             }}
           >
-            +
-          </Text>
+            <Text style={styles.buttonRight}>+</Text>
+          </TouchableOpacity>
           <Text>max: </Text>
           <TextInput
             style={styles.max}

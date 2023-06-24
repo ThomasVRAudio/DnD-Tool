@@ -6,7 +6,7 @@ import SelectDropdown from "react-native-select-dropdown";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-const Weapon = ({ weapon, setCustomModifier, index }) => {
+const Weapon = ({ weapon, setCustomModifier, index, onDelete }) => {
   const DATA = {
     strength: 0,
     dexterity: 0,
@@ -116,24 +116,33 @@ const Weapon = ({ weapon, setCustomModifier, index }) => {
         </View>
       </TouchableOpacity>
       {tapOpen && (
-        <View style={styles.modifier_container}>
-          <Text style={styles.ability_modifier}>Ability Modifier: </Text>
-          <SelectDropdown
-            renderDropdownIcon={() => <Ionicons name="caret-down"></Ionicons>}
-            buttonStyle={styles.drop_down}
-            buttonTextStyle={styles.drop_down_text}
-            dropdownStyle={styles.drop_down_open}
-            data={selectAbility}
-            defaultValue={selectedModifier}
-            showsVerticalScrollIndicator={false}
-            onSelect={(selectedItem) => {
-              setCustomModifier({
-                index: index,
-                modifier: String(selectedItem).toLowerCase(),
-              });
-              setModifierSelected(selectedItem);
-            }}
-          />
+        <View>
+          <View style={styles.modifier_container}>
+            <Text style={styles.ability_modifier}>Ability Modifier: </Text>
+            <SelectDropdown
+              renderDropdownIcon={() => <Ionicons name="caret-down"></Ionicons>}
+              buttonStyle={styles.drop_down}
+              buttonTextStyle={styles.drop_down_text}
+              dropdownStyle={styles.drop_down_open}
+              data={selectAbility}
+              defaultValue={selectedModifier}
+              showsVerticalScrollIndicator={false}
+              onSelect={(selectedItem) => {
+                setCustomModifier({
+                  index: index,
+                  modifier: String(selectedItem).toLowerCase(),
+                });
+                setModifierSelected(selectedItem);
+              }}
+            />
+          </View>
+          <TouchableOpacity onPress={() => onDelete(index)}>
+            <Ionicons
+              name="trash-outline"
+              size={20}
+              style={styles.delete}
+            ></Ionicons>
+          </TouchableOpacity>
         </View>
       )}
     </View>
@@ -196,5 +205,9 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.card,
     borderWidth: 1,
     borderRadius: 10,
+  },
+  delete: {
+    textAlign: "right",
+    paddingTop: 10,
   },
 });

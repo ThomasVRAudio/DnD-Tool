@@ -95,6 +95,13 @@ const CombatScreen = () => {
     setWeapons(arrayCopy);
   };
 
+  const onPressDelete = (index) => {
+    let newWeaponsList = [...weapons];
+    newWeaponsList.splice(index, 1);
+
+    setWeapons(newWeaponsList);
+  };
+
   return (
     <LinearGradient colors={Colors.basicBackground} style={styles.container}>
       <ScrollView>
@@ -146,6 +153,7 @@ const CombatScreen = () => {
               weapon={weapon}
               setCustomModifier={setCustomModifier}
               index={index}
+              onDelete={onPressDelete}
             />
           );
         })}

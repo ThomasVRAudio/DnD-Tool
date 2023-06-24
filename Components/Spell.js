@@ -2,6 +2,7 @@ import { View, Text, StyleSheet, ScrollView } from "react-native";
 import Colors from "../constants/Colors";
 import { useState } from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const Spell = ({ data, onPressDelete, index }) => {
   const [detailed, setDetailed] = useState(false);
@@ -13,26 +14,28 @@ const Spell = ({ data, onPressDelete, index }) => {
   return (
     <ScrollView
       style={styles.container}
-      onTouchEnd={() => showDetails()}
+      //onTouchEnd={() => showDetails()}
       showsVerticalScrollIndicator={false}
     >
-      <View style={detailed ? styles.upperTextDetailed : styles.upperText}>
-        <Text style={styles.title}>{data && data.name}</Text>
-        <View style={styles.rightTop}>
-          <Text style={styles.level}>
-            {data && data.level !== 0
-              ? data.level === "Trait"
-                ? data.level
-                : "level: " + data.level
-              : "Cantrip"}
-          </Text>
-          <Ionicons
-            name="trash-outline"
-            onPress={() => onPressDelete(index)}
-            padding={8}
-          ></Ionicons>
+      <TouchableOpacity onPress={() => showDetails()}>
+        <View style={detailed ? styles.upperTextDetailed : styles.upperText}>
+          <Text style={styles.title}>{data && data.name}</Text>
+          <View style={styles.rightTop}>
+            <Text style={styles.level}>
+              {data && data.level !== 0
+                ? data.level === "Trait"
+                  ? data.level
+                  : "level: " + data.level
+                : "Cantrip"}
+            </Text>
+            <Ionicons
+              name="trash-outline"
+              onPress={() => onPressDelete(index)}
+              padding={8}
+            ></Ionicons>
+          </View>
         </View>
-      </View>
+      </TouchableOpacity>
       <View>
         {detailed && (
           <>
