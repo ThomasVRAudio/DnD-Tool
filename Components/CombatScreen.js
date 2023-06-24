@@ -13,7 +13,10 @@ const CombatScreen = () => {
       name: "",
       damage_dice: "",
       weapon_range: "",
-      equipment_category: ""
+      equipment_category: "",
+      finesse: false,
+      custom_modifier: false,
+      modifier: "",
     },
   ];
 
@@ -63,12 +66,19 @@ const CombatScreen = () => {
       return;
     }
 
+    let weapon_properties = data.properties;
+
+    let hasFinesse = weapon_properties.find((e) => e.name === "Finesse")
+      ? true
+      : false;
+
     let arrayCopy = [...weapons];
     let newWeapon = {
       name: data.name,
       damage_dice: data.damage.damage_dice,
       weapon_range: data.weapon_range,
-      equipment_category: data.equipment_category.index
+      equipment_category: data.equipment_category.index,
+      finesse: hasFinesse,
     };
     arrayCopy.push(newWeapon);
     setWeapons(arrayCopy);
@@ -77,6 +87,13 @@ const CombatScreen = () => {
   useEffect(() => {
     AsyncStorage.setItem("weapons", JSON.stringify(weapons));
   }, [weapons]);
+
+  const setCustomModifier = ({ index, modifier }) => {
+    let arrayCopy = [...weapons];
+    arrayCopy[index].modifier = modifier;
+    arrayCopy[index].custom_modifier = true;
+    setWeapons(arrayCopy);
+  };
 
   return (
     <LinearGradient colors={Colors.basicBackground} style={styles.container}>
@@ -127,6 +144,8 @@ const CombatScreen = () => {
             <Weapon
               key={index}
               weapon={weapon}
+              setCustomModifier={setCustomModifier}
+              index={index}
             />
           );
         })}
