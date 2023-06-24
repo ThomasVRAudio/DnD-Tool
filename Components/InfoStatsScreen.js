@@ -8,7 +8,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import CharacterInfo from "./CharacterInfo";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-const AbilityScoresScreen = () => {
+const InfoStatsScreen = () => {
   const DATA = {
     strength: 0,
     dexterity: 0,
@@ -190,7 +190,7 @@ const AbilityScoresScreen = () => {
   );
 };
 
-export default AbilityScoresScreen;
+export default InfoStatsScreen;
 
 const styles = StyleSheet.create({
   container: {
