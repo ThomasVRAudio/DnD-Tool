@@ -96,9 +96,10 @@ const ArmorSection = ({ abilityScores, setArmorClass }) => {
       }
     });
 
-    if (wearsArmor === false) {
+    if (wearsArmor === false && armor.length !== 0) {
       AC += 10;
     }
+
     setArmorClass(AC);
   }, [armor]);
 
