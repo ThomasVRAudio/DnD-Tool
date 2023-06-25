@@ -1,30 +1,17 @@
 import { View, StyleSheet, Text } from "react-native";
-import Colors from "../constants/Colors";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import Colors from "../../constants/Colors";
 import { useEffect, useState } from "react";
 import SelectDropdown from "react-native-select-dropdown";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-const Weapon = ({ weapon, setCustomModifier, index, onDelete }) => {
-  const DATA = {
-    strength: 0,
-    dexterity: 0,
-    constitution: 0,
-    intelligence: 0,
-    wisdom: 0,
-    charisma: 0,
-    level: 0,
-    speed: 0,
-    name: "Name",
-    race: "Race",
-    class: "class",
-    background: "Background",
-    alignment: "alignment",
-    exp: 0,
-    perceptionProficient: false,
-  };
-
+const Weapon = ({
+  weapon,
+  setCustomModifier,
+  index,
+  onDelete,
+  abilityScores,
+}) => {
   const selectAbility = [
     "Strength",
     "Dexterity",
@@ -34,23 +21,10 @@ const Weapon = ({ weapon, setCustomModifier, index, onDelete }) => {
     "Charisma",
   ];
 
-  const [abilityScores, setAbilityScores] = useState(DATA);
   const [proficiencyBonus, setProficiencyBonus] = useState(0);
   const [modifier, setModifier] = useState(selectAbility);
   const [selectedModifier, setSelectedModifier] = useState("none");
   const [tapOpen, setTapOpen] = useState(false);
-
-  useEffect(() => {
-    getData();
-  }, []);
-
-  const getData = async () => {
-    const jsonValue = await AsyncStorage.getItem("abilityScores");
-
-    if (jsonValue != null) {
-      setAbilityScores(JSON.parse(jsonValue));
-    }
-  };
 
   useEffect(() => {
     if (weapon.custom_modifier) {

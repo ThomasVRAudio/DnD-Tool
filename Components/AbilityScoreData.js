@@ -1,0 +1,17 @@
+export const AbilityScoreData = {
+  strength: 0,
+  dexterity: 0,
+  constitution: 0,
+  intelligence: 0,
+  wisdom: 0,
+  charisma: 0,
+  level: 0,
+  speed: 0,
+  name: "Name",
+  race: "Race",
+  class: "class",
+  background: "Background",
+  alignment: "alignment",
+  exp: 0,
+  perceptionProficient: false,
+};

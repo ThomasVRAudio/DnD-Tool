@@ -7,26 +7,14 @@ import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import CharacterInfo from "./CharacterInfo";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { AbilityScoreData } from "./AbilityScoreData";
 
-const InfoStatsScreen = () => {
-  const DATA = {
-    strength: 0,
-    dexterity: 0,
-    constitution: 0,
-    intelligence: 0,
-    wisdom: 0,
-    charisma: 0,
-    level: 0,
-    speed: 0,
-    name: "Name",
-    race: "Race",
-    class: "class",
-    background: "Background",
-    alignment: "alignment",
-    exp: 0,
-    perceptionProficient: false,
-  };
-
+const InfoStatsScreen = ({
+  abilityScoreData,
+  setAbilityScoreData,
+  refresh,
+  setRefresh,
+}) => {
   const MODIFIERS = {
     spellcastingAbilityModifier: 0,
     spellSaveDC: 0,
@@ -34,9 +22,8 @@ const InfoStatsScreen = () => {
     spellAttack: 0,
   };
 
-  const [data, setData] = useState(DATA);
+  const [data, setData] = useState(AbilityScoreData);
   const [modifiers, setModifiers] = useState(MODIFIERS);
-  const [refresh, setRefresh] = useState(false);
   const [refreshModifiers, setRefreshModifiers] = useState(false);
 
   useEffect(() => {
@@ -44,17 +31,14 @@ const InfoStatsScreen = () => {
   }, []);
 
   const getData = async () => {
-    const jsonValue = await AsyncStorage.getItem("abilityScores");
-    if (jsonValue != null) {
-      setData(JSON.parse(jsonValue));
-      setRefresh(!refresh);
-    }
+    setData(abilityScoreData);
   };
 
   useEffect(() => {
     AsyncStorage.setItem("abilityScores", JSON.stringify(data));
+    setData(abilityScoreData);
     setAllModifiers();
-  }, [refresh]);
+  }, [abilityScoreData]);
 
   const setAllModifiers = () => {
     let newModifiers = modifiers;
@@ -93,7 +77,7 @@ const InfoStatsScreen = () => {
   const onEditData = ({ prop, value }) => {
     let dataCopy = data;
     dataCopy[prop] = value;
-    setData(dataCopy);
+    setAbilityScoreData(dataCopy);
     setRefresh(!refresh);
   };
 
