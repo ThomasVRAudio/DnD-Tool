@@ -38,31 +38,31 @@ const InfoStatsScreen = ({
     AsyncStorage.setItem("abilityScores", JSON.stringify(data));
     setData(abilityScoreData);
     setAllModifiers();
-  }, [abilityScoreData]);
+  }, [refresh]);
 
   const setAllModifiers = () => {
     let newModifiers = modifiers;
 
     switch (true) {
-      case data.level <= 4:
+      case abilityScoreData.level <= 4:
         newModifiers.proficiencyBonus = 2;
         break;
-      case data.level >= 5 && data.level <= 8:
+      case abilityScoreData.level >= 5 && abilityScoreData.level <= 8:
         newModifiers.proficiencyBonus = 3;
         break;
-      case data.level >= 9 && data.level <= 12:
+      case abilityScoreData.level >= 9 && abilityScoreData.level <= 12:
         newModifiers.proficiencyBonus = 4;
         break;
-      case data.level >= 13 && data.level <= 16:
+      case abilityScoreData.level >= 13 && abilityScoreData.level <= 16:
         newModifiers.proficiencyBonus = 5;
         break;
-      case data.level >= 17:
+      case abilityScoreData.level >= 17:
         newModifiers.proficiencyBonus = 6;
         break;
     }
 
     newModifiers.spellcastingAbilityModifier = Math.floor(
-      (data.wisdom - 10) / 2 + newModifiers.proficiencyBonus
+      (abilityScoreData.wisdom - 10) / 2 + newModifiers.proficiencyBonus
     );
 
     newModifiers.spellAttack =

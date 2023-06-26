@@ -26,13 +26,15 @@ const Armor = ({ armor, index, onDelete }) => {
       </TouchableOpacity>
       <View>
         {tapOpen && (
-          <TouchableOpacity onPress={() => onDelete(index)}>
-            <Ionicons
-              name="trash-outline"
-              size={20}
-              style={styles.delete}
-            ></Ionicons>
-          </TouchableOpacity>
+          <View style={styles.trashContainer}>
+            <TouchableOpacity onPress={() => onDelete(index)}>
+              <Ionicons
+                name="trash-outline"
+                size={20}
+                style={styles.delete}
+              ></Ionicons>
+            </TouchableOpacity>
+          </View>
         )}
       </View>
     </View>
@@ -99,5 +101,8 @@ const styles = StyleSheet.create({
   delete: {
     textAlign: "right",
     paddingTop: 10,
+  },
+  trashContainer: {
+    alignItems: "flex-end",
   },
 });

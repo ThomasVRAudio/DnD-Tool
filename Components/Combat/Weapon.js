@@ -110,13 +110,11 @@ const Weapon = ({
               }}
             />
           </View>
-          <TouchableOpacity onPress={() => onDelete(index)}>
-            <Ionicons
-              name="trash-outline"
-              size={20}
-              style={styles.delete}
-            ></Ionicons>
-          </TouchableOpacity>
+          <View style={styles.delete}>
+            <TouchableOpacity onPress={() => onDelete(index)}>
+              <Ionicons name="trash-outline" size={20}></Ionicons>
+            </TouchableOpacity>
+          </View>
         </View>
       )}
     </View>
@@ -181,7 +179,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   delete: {
-    textAlign: "right",
+    alignItems: "flex-end",
     paddingTop: 10,
   },
 });

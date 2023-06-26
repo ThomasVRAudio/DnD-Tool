@@ -1,6 +1,6 @@
 import { StyleSheet, View, Text, TextInput } from "react-native";
 import Colors from "../../constants/Colors";
-
+import Ionicons from "@expo/vector-icons/Ionicons";
 import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -33,7 +33,6 @@ const HitPointSection = () => {
   }, [refresh]);
 
   const onEditData = ({ value, prop }) => {
-
     let copy = health;
     copy[prop] = value;
     setHealth(copy);
@@ -43,15 +42,24 @@ const HitPointSection = () => {
   return (
     <View style={styles.healthContainer}>
       <View style={styles.currentHPContainer}>
-        <View style={styles.hpTop}>
-          <Text style={styles.hpMaxTitle}>Hit Point Maximum: </Text>
-          <TextInput
-            style={styles.hpMax}
-            onChangeText={(text) =>
-              onEditData({ value: text, prop: "maxHealth" })
+        <View style={styles.upperPart}>
+          <View style={styles.hpTop}>
+            <Text style={styles.hpMaxTitle}>Hit Point Maximum: </Text>
+            <TextInput
+              style={styles.hpMax}
+              onChangeText={(text) =>
+                onEditData({ value: text, prop: "maxHealth" })
+              }
+              defaultValue={health.maxHealth}
+            ></TextInput>
+          </View>
+          <TouchableOpacity
+            onPress={() =>
+              onEditData({ value: health.maxHealth, prop: "health" })
             }
-            defaultValue={health.maxHealth}
-          ></TextInput>
+          >
+            <Ionicons name="reload" size={20} />
+          </TouchableOpacity>
         </View>
         <View style={styles.healthCounterContainer}>
           <TouchableOpacity
@@ -85,6 +93,12 @@ const HitPointSection = () => {
         </View>
       </View>
       <View style={styles.temporaryHPContainer}>
+        <TouchableOpacity
+          style={styles.tempUpperPart}
+          onPress={() => onEditData({ value: "0", prop: "tempHealth" })}
+        >
+          <Ionicons name="reload" size={20} />
+        </TouchableOpacity>
         <View style={styles.healthCounterContainer}>
           <TouchableOpacity
             onPress={() =>
@@ -201,5 +215,15 @@ const styles = StyleSheet.create({
   healthCounter: {
     fontFamily: "Serif-Light",
     fontSize: 30,
+  },
+  upperPart: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 10,
+  },
+  tempUpperPart: {
+    alignItems: "flex-end",
+    paddingHorizontal: 10,
   },
 });
