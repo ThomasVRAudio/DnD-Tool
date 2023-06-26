@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet } from "react-native";
-import { ScrollView, TextInput } from "react-native-gesture-handler";
+import { ScrollView } from "react-native-gesture-handler";
 import AbilityScore from "./AbilityScore";
 import Colors from "../constants/Colors";
 import { LinearGradient } from "expo-linear-gradient";
@@ -7,11 +7,10 @@ import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import CharacterInfo from "./CharacterInfo";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { AbilityScoreData } from "./AbilityScoreData";
 
 const InfoStatsScreen = ({
-  abilityScoreData,
-  setAbilityScoreData,
+  characterData,
+  setCharacterData,
   refresh,
   setRefresh,
 }) => {
@@ -22,7 +21,6 @@ const InfoStatsScreen = ({
     spellAttack: 0,
   };
 
-  const [data, setData] = useState(AbilityScoreData);
   const [modifiers, setModifiers] = useState(MODIFIERS);
   const [refreshModifiers, setRefreshModifiers] = useState(false);
 
@@ -31,12 +29,12 @@ const InfoStatsScreen = ({
   }, []);
 
   const getData = async () => {
-    setData(abilityScoreData);
+    setCharacterData(characterData);
   };
 
   useEffect(() => {
-    AsyncStorage.setItem("abilityScores", JSON.stringify(data));
-    setData(abilityScoreData);
+    AsyncStorage.setItem("characterData", JSON.stringify(characterData));
+    setCharacterData(characterData);
     setAllModifiers();
   }, [refresh]);
 
@@ -44,25 +42,29 @@ const InfoStatsScreen = ({
     let newModifiers = modifiers;
 
     switch (true) {
-      case abilityScoreData.level <= 4:
+      case characterData.character_info.level <= 4:
         newModifiers.proficiencyBonus = 2;
         break;
-      case abilityScoreData.level >= 5 && abilityScoreData.level <= 8:
+      case characterData.character_info.level >= 5 &&
+        characterData.character_info.level <= 8:
         newModifiers.proficiencyBonus = 3;
         break;
-      case abilityScoreData.level >= 9 && abilityScoreData.level <= 12:
+      case characterData.character_info.level >= 9 &&
+        characterData.character_info.level <= 12:
         newModifiers.proficiencyBonus = 4;
         break;
-      case abilityScoreData.level >= 13 && abilityScoreData.level <= 16:
+      case characterData.character_info.level >= 13 &&
+        characterData.character_info.level <= 16:
         newModifiers.proficiencyBonus = 5;
         break;
-      case abilityScoreData.level >= 17:
+      case characterData.character_info.level >= 17:
         newModifiers.proficiencyBonus = 6;
         break;
     }
 
     newModifiers.spellcastingAbilityModifier = Math.floor(
-      (abilityScoreData.wisdom - 10) / 2 + newModifiers.proficiencyBonus
+      (characterData.ability_scores.wisdom - 10) / 2 +
+        newModifiers.proficiencyBonus
     );
 
     newModifiers.spellAttack =
@@ -74,10 +76,10 @@ const InfoStatsScreen = ({
     setRefreshModifiers(!refreshModifiers);
   };
 
-  const onEditData = ({ prop, value }) => {
-    let dataCopy = data;
-    dataCopy[prop] = value;
-    setAbilityScoreData(dataCopy);
+  const onEditData = ({ prop, section, value }) => {
+    let dataCopy = characterData;
+    dataCopy[section][prop] = value;
+    setCharacterData(dataCopy);
     setRefresh(!refresh);
   };
 
@@ -85,40 +87,40 @@ const InfoStatsScreen = ({
     <LinearGradient style={styles.container} colors={Colors.basicBackground}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.scroll}>
-          <CharacterInfo data={data} confirm={onEditData} />
+          <CharacterInfo data={characterData} confirm={onEditData} />
           <View style={styles.rowContainer}>
             <AbilityScore
               ability={"Strength"}
-              value={data.strength}
+              value={characterData.ability_scores.strength}
               confirm={onEditData}
             />
             <AbilityScore
               ability={"Dexterity"}
-              value={data.dexterity}
+              value={characterData.ability_scores.dexterity}
               confirm={onEditData}
             />
           </View>
           <View style={styles.rowContainer}>
             <AbilityScore
               ability={"Constitution"}
-              value={data.constitution}
+              value={characterData.ability_scores.constitution}
               confirm={onEditData}
             />
             <AbilityScore
               ability={"Intelligence"}
-              value={data.intelligence}
+              value={characterData.ability_scores.intelligence}
               confirm={onEditData}
             />
           </View>
           <View style={styles.rowContainer}>
             <AbilityScore
               ability={"Wisdom"}
-              value={data.wisdom}
+              value={characterData.ability_scores.wisdom}
               confirm={onEditData}
             />
             <AbilityScore
               ability={"Charisma"}
-              value={data.charisma}
+              value={characterData.ability_scores.charisma}
               confirm={onEditData}
             />
           </View>
@@ -130,8 +132,9 @@ const InfoStatsScreen = ({
               <Text style={styles.passiveScore}>
                 {Math.floor(
                   10 +
-                    (data.wisdom - 10) / 2 +
-                    (data.perceptionProficient && modifiers.proficiencyBonus)
+                    (characterData.ability_scores.wisdom - 10) / 2 +
+                    (characterData.skills.perception &&
+                      modifiers.proficiencyBonus)
                 )}
               </Text>
             </View>
@@ -139,7 +142,7 @@ const InfoStatsScreen = ({
               <Text style={styles.proficient}>Proficient: </Text>
               <Ionicons
                 name={
-                  data.perceptionProficient
+                  characterData.skills.perception
                     ? "checkmark-circle"
                     : "md-close-circle"
                 }
@@ -147,8 +150,9 @@ const InfoStatsScreen = ({
                 color={"#000000AD"}
                 onPress={() =>
                   onEditData({
-                    prop: "perceptionProficient",
-                    value: !data.perceptionProficient,
+                    prop: "perception",
+                    section: "skills",
+                    value: !characterData.skills.perception,
                   })
                 }
               />

@@ -21,7 +21,7 @@ const AbilityScore = ({ ability, value, confirm }) => {
         style={styles.score}
         defaultValue={String(abilityValue)}
         onChangeText={(text) =>
-          confirm({ value: text, prop: String(ability).toLowerCase() })
+          confirm({ value: text, prop: String(ability).toLowerCase(), section: "ability_scores" })
         }
         keyboardType="numeric"
         onFocus={() => clearValue()}

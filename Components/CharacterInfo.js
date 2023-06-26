@@ -10,8 +10,14 @@ const CharacterInfo = ({ data, confirm }) => {
             <Text style={styles.name}>Name </Text>
             <TextInput
               style={styles.nameInput}
-              defaultValue={String(data.name)}
-              onChangeText={(text) => confirm({ value: text, prop: "name" })}
+              defaultValue={String(data.character_info.name)}
+              onChangeText={(text) =>
+                confirm({
+                  value: text,
+                  prop: "name",
+                  section: "character_info",
+                })
+              }
             ></TextInput>
           </View>
         </View>
@@ -21,8 +27,14 @@ const CharacterInfo = ({ data, confirm }) => {
               <Text style={styles.statTitle}>Level </Text>
               <TextInput
                 style={styles.score}
-                defaultValue={String(data.level)}
-                onChangeText={(text) => confirm({ value: text, prop: "level" })}
+                defaultValue={String(data.character_info.level)}
+                onChangeText={(text) =>
+                  confirm({
+                    value: text,
+                    prop: "level",
+                    section: "character_info",
+                  })
+                }
                 keyboardType="numeric"
               ></TextInput>
             </View>
@@ -30,8 +42,14 @@ const CharacterInfo = ({ data, confirm }) => {
               <Text style={styles.statTitle}>Race </Text>
               <TextInput
                 style={styles.score}
-                defaultValue={String(data.race)}
-                onChangeText={(text) => confirm({ value: text, prop: "race" })}
+                defaultValue={String(data.character_info.race)}
+                onChangeText={(text) =>
+                  confirm({
+                    value: text,
+                    prop: "race",
+                    section: "character_info",
+                  })
+                }
               ></TextInput>
             </View>
           </View>
@@ -40,9 +58,13 @@ const CharacterInfo = ({ data, confirm }) => {
               <Text style={styles.statTitle}>Background </Text>
               <TextInput
                 style={styles.score}
-                defaultValue={String(data.background)}
+                defaultValue={String(data.character_info.background)}
                 onChangeText={(text) =>
-                  confirm({ value: text, prop: "background" })
+                  confirm({
+                    value: text,
+                    prop: "background",
+                    section: "character_info",
+                  })
                 }
               ></TextInput>
             </View>
@@ -50,8 +72,14 @@ const CharacterInfo = ({ data, confirm }) => {
               <Text style={styles.statTitle}>Class </Text>
               <TextInput
                 style={styles.score}
-                defaultValue={String(data.class)}
-                onChangeText={(text) => confirm({ value: text, prop: "class" })}
+                defaultValue={String(data.character_info.class)}
+                onChangeText={(text) =>
+                  confirm({
+                    value: text,
+                    prop: "class",
+                    section: "character_info",
+                  })
+                }
               ></TextInput>
             </View>
           </View>
@@ -60,9 +88,13 @@ const CharacterInfo = ({ data, confirm }) => {
               <Text style={styles.statTitle}>Alignment </Text>
               <TextInput
                 style={styles.score}
-                defaultValue={String(data.alignment)}
+                defaultValue={String(data.character_info.alignment)}
                 onChangeText={(text) =>
-                  confirm({ value: text, prop: "alignment" })
+                  confirm({
+                    value: text,
+                    prop: "alignment",
+                    section: "character_info",
+                  })
                 }
               ></TextInput>
             </View>
@@ -70,8 +102,14 @@ const CharacterInfo = ({ data, confirm }) => {
               <Text style={styles.statTitle}>Exp </Text>
               <TextInput
                 style={styles.score}
-                defaultValue={String(data.exp)}
-                onChangeText={(text) => confirm({ value: text, prop: "exp" })}
+                defaultValue={String(data.character_info.exp)}
+                onChangeText={(text) =>
+                  confirm({
+                    value: text,
+                    prop: "exp",
+                    section: "character_info",
+                  })
+                }
                 keyboardType="numeric"
               ></TextInput>
             </View>

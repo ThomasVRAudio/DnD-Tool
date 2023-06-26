@@ -10,7 +10,7 @@ const Weapon = ({
   setCustomModifier,
   index,
   onDelete,
-  abilityScores,
+  characterData,
 }) => {
   const selectAbility = [
     "Strength",
@@ -34,7 +34,8 @@ const Weapon = ({
 
     if (weapon.weapon_range === "Melee") {
       if (weapon.finesse) {
-        parseInt(abilityScores.dexterity) > parseInt(abilityScores.strength)
+        parseInt(characterData.ability_scores.dexterity) >
+        parseInt(characterData.ability_scores.strength)
           ? setModifierSelected("dexterity")
           : setModifierSelected("strength");
       } else {
@@ -43,32 +44,35 @@ const Weapon = ({
     } else {
       setModifierSelected("dexterity");
     }
-  }, [abilityScores, selectedModifier]);
+  }, [characterData, selectedModifier]);
 
   const setModifierSelected = (name) => {
-    setModifier(abilityScores[name]);
+    setModifier(characterData.ability_scores[name]);
     setSelectedModifier(String(name).charAt(0).toUpperCase() + name.slice(1));
   };
 
   useEffect(() => {
     switch (true) {
-      case abilityScores.level <= 4:
+      case characterData.character_info.level <= 4:
         setProficiencyBonus(2);
         break;
-      case abilityScores.level >= 5 && abilityScores.level <= 8:
+      case characterData.character_info.level >= 5 &&
+        characterData.character_info.level <= 8:
         setProficiencyBonus(3);
         break;
-      case abilityScores.level >= 9 && abilityScores.level <= 12:
+      case characterData.character_info.level >= 9 &&
+        characterData.character_info.level <= 12:
         setProficiencyBonus(4);
         break;
-      case abilityScores.level >= 13 && abilityScores.level <= 16:
+      case characterData.character_info.level >= 13 &&
+        characterData.character_info.level <= 16:
         setProficiencyBonus(5);
         break;
-      case abilityScores.level >= 17:
+      case characterData.character_info.level >= 17:
         setProficiencyBonus(6);
         break;
     }
-  }, [abilityScores]);
+  }, [characterData]);
 
   return (
     <View style={styles.container}>

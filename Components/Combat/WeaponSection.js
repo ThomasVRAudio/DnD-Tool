@@ -4,7 +4,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const WeaponSection = ({ abilityScores }) => {
+const WeaponSection = ({ characterData }) => {
   const [search, setSearch] = useState("");
   const [isSearching, setIsSearching] = useState(false);
   const [data, setData] = useState([]);
@@ -101,7 +101,7 @@ const WeaponSection = ({ abilityScores }) => {
             setCustomModifier={setCustomModifier}
             index={index}
             onDelete={onPressDelete}
-            abilityScores={abilityScores}
+            characterData={characterData}
           />
         );
       })}

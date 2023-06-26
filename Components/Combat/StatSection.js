@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const StatSection = ({ abilityScores, armorClass }) => {
+const StatSection = ({ characterData, armorClass }) => {
   const DATA = {
     armor_class: 16,
     armor_class_custom: false,
@@ -71,7 +71,7 @@ const StatSection = ({ abilityScores, armorClass }) => {
         </View>
         <View style={styles.stats}>
           <Text style={styles.statScore}>
-            {Math.floor((abilityScores.dexterity - 10) / 2)}
+            {Math.floor((characterData.ability_scores.dexterity - 10) / 2)}
           </Text>
           <Text style={styles.statTitle}>Initiative</Text>
         </View>

@@ -11,7 +11,7 @@ import InfoStatsScreen from "./Components/InfoStatsScreen";
 import CombatScreen from "./Components/Combat/CombatScreen";
 import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { AbilityScoreData } from "./Components/AbilityScoreData";
+import { CharacterData } from "./Components/CharacterData";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -22,24 +22,24 @@ export default function App() {
     "Serif-Bold-Italic": require("./assets/fonts/IBMPlexSerif-SemiBoldItalic.ttf"),
   });
 
-  const [abilityScoreData, setAbilityScoreData] = useState(AbilityScoreData);
-  const [abilityScoreRefresh, setAbilityScoreRefresh] = useState(false);
+  const [characterData, setCharacterData] = useState(CharacterData);
+  const [characterDataRefresh, setCharacterDataRefresh] = useState(false);
 
   useEffect(() => {
     getData();
   }, []);
 
   const getData = async () => {
-    const jsonValue = await AsyncStorage.getItem("abilityScores");
+    const jsonValue = await AsyncStorage.getItem("characterData");
     if (jsonValue != null) {
-      setAbilityScoreData(JSON.parse(jsonValue));
-      setAbilityScoreRefresh(!abilityScoreRefresh);
+      setCharacterData(JSON.parse(jsonValue));
+      setCharacterDataRefresh(!characterDataRefresh);
     }
   };
 
   useEffect(() => {
-    AsyncStorage.setItem("abilityScores", JSON.stringify(abilityScoreData));
-  }, [abilityScoreRefresh]);
+    AsyncStorage.setItem("characterData", JSON.stringify(characterData));
+  }, [characterDataRefresh]);
 
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded) {
@@ -55,7 +55,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Combat">
+      <Drawer.Navigator initialRouteName="Character Info & Stats">
         <Drawer.Screen name="Search Spells" component={SearchScreen} />
         <Drawer.Screen name="Items" component={ItemsScreen} />
         <Drawer.Screen name="Spell Slots" component={SpellSlotsScreen} />
@@ -63,15 +63,15 @@ export default function App() {
         <Drawer.Screen name="Character Info & Stats">
           {() => (
             <InfoStatsScreen
-              abilityScoreData={abilityScoreData}
-              setAbilityScoreData={setAbilityScoreData}
-              setRefresh={setAbilityScoreRefresh}
-              refresh={abilityScoreRefresh}
+              characterData={characterData}
+              setCharacterData={setCharacterData}
+              setRefresh={setCharacterDataRefresh}
+              refresh={characterDataRefresh}
             />
           )}
         </Drawer.Screen>
         <Drawer.Screen name="Combat">
-          {() => <CombatScreen abilityScoreData={abilityScoreData} />}
+          {() => <CombatScreen characterData={characterData} />}
         </Drawer.Screen>
       </Drawer.Navigator>
     </NavigationContainer>

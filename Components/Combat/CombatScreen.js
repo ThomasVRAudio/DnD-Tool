@@ -7,31 +7,31 @@ import StatSection from "./StatSection";
 
 import { useState, useEffect } from "react";
 import ArmorSection from "./ArmorSection";
-import { AbilityScoreData } from "../AbilityScoreData";
+import CharacterData from "../CharacterData";
 import HitPointSection from "./HitPointSection";
 
-export default function CombatScreen({ abilityScoreData }) {
-  const [abilityScores, setAbilityScores] = useState(AbilityScoreData);
+export default function CombatScreen({ characterData }) {
+  const [data, setData] = useState(CharacterData);
   const [armorClass, setArmorClass] = useState();
 
   useEffect(() => {
     getData();
-  }, [, abilityScoreData]);
+  }, [, characterData]);
 
   const getData = async () => {
-    setAbilityScores(abilityScoreData);
+    setData(characterData);
   };
 
   return (
     <LinearGradient colors={Colors.basicBackground} style={styles.container}>
       <ScrollView>
-        <StatSection abilityScores={abilityScores} armorClass={armorClass} />
+        <StatSection characterData={characterData} armorClass={armorClass} />
         <HitPointSection />
         <Text style={styles.sectionTitle}>Weapons</Text>
-        <WeaponSection abilityScores={abilityScores} />
+        <WeaponSection characterData={characterData} />
         <Text style={styles.sectionTitle}>Armor</Text>
         <ArmorSection
-          abilityScores={abilityScores}
+          characterData={characterData}
           setArmorClass={setArmorClass}
         />
       </ScrollView>
