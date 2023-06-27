@@ -4,14 +4,14 @@ import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import ItemsScreen from "./Components/ItemsScreen";
-import SpellsScreen from "./Components/SpellsScreen";
-import SpellSlotsScreen from "./Components/SpellSlotsScreen";
-import InfoStatsScreen from "./Components/InfoStatsScreen";
+import ItemsScreen from "./Components/Items/ItemsScreen";
+import SpellsScreen from "./Components/Spells/SpellsScreen";
+import SpellSlotsScreen from "./Components/SpellSlots/SpellSlotsScreen";
+import InfoStatsScreen from "./Components/CharacterInfo/InfoStatsScreen";
 import CombatScreen from "./Components/Combat/CombatScreen";
 import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { CharacterData } from "./Components/CharacterData";
+import { CharacterData } from "./Components/Data/CharacterData";
 
 export default function App() {
   const [fontsLoaded] = useFonts({

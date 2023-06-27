@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import AbilityScore from "./AbilityScore";
-import Colors from "../constants/Colors";
+import Colors from "../../constants/Colors";
 import { LinearGradient } from "expo-linear-gradient";
 import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";

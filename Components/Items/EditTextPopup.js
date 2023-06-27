@@ -1,5 +1,5 @@
 import { Text, View, StyleSheet } from "react-native";
-import Colors from "../constants/Colors";
+import Colors from "../../constants/Colors";
 import { TextInput } from "react-native-gesture-handler";
 import Ionicons from "@expo/vector-icons/Ionicons";
 

@@ -3,9 +3,9 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { useState, useEffect } from "react";
 import Spell from "./Spell";
 import { LinearGradient } from "expo-linear-gradient";
-import Colors from "../constants/Colors";
+import Colors from "../../constants/Colors";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import SpellData from "./spellData";
+import SpellData from "../Data/spellData";
 
 const SpellSlotsScreen = () => {
   const [data, setData] = useState([]);

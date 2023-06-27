@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Stat from "./Stat";
 import { ScrollView } from "react-native-gesture-handler";
-import Colors from "../constants/Colors";
+import Colors from "../../constants/Colors";
 import { LinearGradient } from "expo-linear-gradient";
 import Ionicons from "@expo/vector-icons/Ionicons";
 

@@ -10,7 +10,7 @@ import React, { useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Colors from "../constants/Colors";
-import SpellData from "./spellData";
+import SpellData from "./Data/spellData";
 
 const SearchScreen = () => {
   const [data, setData] = useState([]);

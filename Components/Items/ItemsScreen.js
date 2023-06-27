@@ -1,6 +1,6 @@
 import { ScrollView, Modal } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import Colors from "../constants/Colors";
+import Colors from "../../constants/Colors";
 import { StyleSheet } from "react-native";
 import Item from "./Item";
 import Ionicons from "@expo/vector-icons/Ionicons";

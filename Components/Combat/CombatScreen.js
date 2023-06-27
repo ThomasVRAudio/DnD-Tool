@@ -5,22 +5,12 @@ import { ScrollView } from "react-native-gesture-handler";
 import WeaponSection from "./WeaponSection";
 import StatSection from "./StatSection";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import ArmorSection from "./ArmorSection";
-import CharacterData from "../CharacterData";
 import HitPointSection from "./HitPointSection";
 
 export default function CombatScreen({ characterData }) {
-  const [data, setData] = useState(CharacterData);
   const [armorClass, setArmorClass] = useState();
-
-  useEffect(() => {
-    getData();
-  }, [, characterData]);
-
-  const getData = async () => {
-    setData(characterData);
-  };
 
   return (
     <LinearGradient colors={Colors.basicBackground} style={styles.container}>

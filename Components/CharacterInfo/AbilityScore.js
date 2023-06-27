@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, TextInput } from "react-native";
-import Colors from "../constants/Colors";
+import Colors from "../../constants/Colors";
 import { useState } from "react";
 import { useEffect } from "react";
 
@@ -21,7 +21,11 @@ const AbilityScore = ({ ability, value, confirm }) => {
         style={styles.score}
         defaultValue={String(abilityValue)}
         onChangeText={(text) =>
-          confirm({ value: text, prop: String(ability).toLowerCase(), section: "ability_scores" })
+          confirm({
+            value: text,
+            prop: String(ability).toLowerCase(),
+            section: "ability_scores",
+          })
         }
         keyboardType="numeric"
         onFocus={() => clearValue()}
