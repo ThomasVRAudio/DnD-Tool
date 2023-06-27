@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import SelectDropdown from "react-native-select-dropdown";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { calculateProficiencyBonus } from "../../constants/Functions";
 
 const Weapon = ({
   weapon,
@@ -52,26 +53,7 @@ const Weapon = ({
   };
 
   useEffect(() => {
-    switch (true) {
-      case characterData.character_info.level <= 4:
-        setProficiencyBonus(2);
-        break;
-      case characterData.character_info.level >= 5 &&
-        characterData.character_info.level <= 8:
-        setProficiencyBonus(3);
-        break;
-      case characterData.character_info.level >= 9 &&
-        characterData.character_info.level <= 12:
-        setProficiencyBonus(4);
-        break;
-      case characterData.character_info.level >= 13 &&
-        characterData.character_info.level <= 16:
-        setProficiencyBonus(5);
-        break;
-      case characterData.character_info.level >= 17:
-        setProficiencyBonus(6);
-        break;
-    }
+    setProficiencyBonus(calculateProficiencyBonus(characterData.character_info.level));
   }, [characterData]);
 
   return (

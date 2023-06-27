@@ -6,7 +6,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import CharacterInfo from "./CharacterInfo";
-import Ionicons from "@expo/vector-icons/Ionicons";
+import { calculateProficiencyBonus } from "../../constants/Functions";
 
 const InfoStatsScreen = ({
   characterData,
@@ -41,26 +41,9 @@ const InfoStatsScreen = ({
   const setAllModifiers = () => {
     let newModifiers = modifiers;
 
-    switch (true) {
-      case characterData.character_info.level <= 4:
-        newModifiers.proficiencyBonus = 2;
-        break;
-      case characterData.character_info.level >= 5 &&
-        characterData.character_info.level <= 8:
-        newModifiers.proficiencyBonus = 3;
-        break;
-      case characterData.character_info.level >= 9 &&
-        characterData.character_info.level <= 12:
-        newModifiers.proficiencyBonus = 4;
-        break;
-      case characterData.character_info.level >= 13 &&
-        characterData.character_info.level <= 16:
-        newModifiers.proficiencyBonus = 5;
-        break;
-      case characterData.character_info.level >= 17:
-        newModifiers.proficiencyBonus = 6;
-        break;
-    }
+    newModifiers.proficiencyBonus = calculateProficiencyBonus(
+      characterData.character_info.level
+    );
 
     newModifiers.spellcastingAbilityModifier = Math.floor(
       (characterData.ability_scores.wisdom - 10) / 2 +
@@ -137,25 +120,6 @@ const InfoStatsScreen = ({
                       modifiers.proficiencyBonus)
                 )}
               </Text>
-            </View>
-            <View style={styles.checkProficiency}>
-              <Text style={styles.proficient}>Proficient: </Text>
-              <Ionicons
-                name={
-                  characterData.skills.perception
-                    ? "checkmark-circle"
-                    : "md-close-circle"
-                }
-                size={18}
-                color={"#000000AD"}
-                onPress={() =>
-                  onEditData({
-                    prop: "perception",
-                    section: "skills",
-                    value: !characterData.skills.perception,
-                  })
-                }
-              />
             </View>
           </View>
           <View style={styles.passiveContainer}>

@@ -12,6 +12,7 @@ import CombatScreen from "./Components/Combat/CombatScreen";
 import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CharacterData } from "./Components/Data/CharacterData";
+import SkillsScreen from "./Components/Skills/SkillsScreen";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -55,7 +56,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Character Info & Stats">
+      <Drawer.Navigator initialRouteName="Skills">
         <Drawer.Screen name="Search Spells" component={SearchScreen} />
         <Drawer.Screen name="Items" component={ItemsScreen} />
         <Drawer.Screen name="Spell Slots" component={SpellSlotsScreen} />
@@ -72,6 +73,16 @@ export default function App() {
         </Drawer.Screen>
         <Drawer.Screen name="Combat">
           {() => <CombatScreen characterData={characterData} />}
+        </Drawer.Screen>
+        <Drawer.Screen name="Skills">
+          {() => (
+            <SkillsScreen
+              characterData={characterData}
+              setCharacterData={setCharacterData}
+              setRefresh={setCharacterDataRefresh}
+              refresh={characterDataRefresh}
+            />
+          )}
         </Drawer.Screen>
       </Drawer.Navigator>
     </NavigationContainer>

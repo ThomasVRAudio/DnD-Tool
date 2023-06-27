@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Armor from "./Armor";
 
-const ArmorSection = ({ abilityScores, setArmorClass }) => {
+const ArmorSection = ({ characterData, setArmorClass }) => {
   const [search, setSearch] = useState("");
   const [isSearching, setIsSearching] = useState(false);
   const [data, setData] = useState([]);
@@ -83,7 +83,9 @@ const ArmorSection = ({ abilityScores, setArmorClass }) => {
 
       if (e.armor_class_dex_bonus) {
         let max_bonus = e.max_bonus ? e.max_bonus : Number.POSITIVE_INFINITY;
-        let dex_bonus = Math.floor((abilityScores.dexterity - 10) / 2);
+        let dex_bonus = Math.floor(
+          (characterData.ability_scores.dexterity - 10) / 2
+        );
         AC += dex_bonus > max_bonus ? max_bonus : dex_bonus;
       }
 

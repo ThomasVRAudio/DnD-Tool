@@ -90,7 +90,7 @@ const StatSection = ({ characterData, armorClass }) => {
           <View style={styles.customACContainer}>
             <Text style={styles.customTitle}>Custom: </Text>
             <Ionicons
-              name={useCustom ? "checkmark-circle" : "md-close-circle"}
+              name={useCustom ? "radio-button-on" : "radio-button-off"}
               size={15}
               color={"#000000AD"}
               onPress={() => {
