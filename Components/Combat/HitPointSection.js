@@ -7,9 +7,9 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 const HitPointSection = () => {
   const DATA = {
-    health: "",
-    maxHealth: "",
-    tempHealth: "",
+    health: "0",
+    maxHealth: "0",
+    tempHealth: "0",
   };
 
   const [health, setHealth] = useState(DATA);

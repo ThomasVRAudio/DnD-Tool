@@ -4,7 +4,8 @@ const Colors = {
   textGrayed: "#03030349",
   basicBackground: ["#8A6C67", "#F3C8A5", "#B99D9D"],
   button: "#E7B587",
-  card: "#E0C7A1"
+  card: "#E0C7A1",
+  header: "#F5D3A8",
 };
 
 export default Colors;

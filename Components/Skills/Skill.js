@@ -2,7 +2,6 @@ import { View, StyleSheet, Text } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { calculateProficiencyBonus } from "../../constants/Functions";
-import Colors from "../../constants/Colors";
 
 const Skill = ({
   title,
@@ -12,6 +11,7 @@ const Skill = ({
   abilityScoreName,
   characterData,
 }) => {
+
   let abilityScore = (name) => {
     if (!characterData.ability_scores) {
       return;

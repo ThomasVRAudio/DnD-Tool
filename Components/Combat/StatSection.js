@@ -66,7 +66,8 @@ const StatSection = ({ characterData, armorClass }) => {
               <Text style={styles.statScore}>{armorClass}</Text>
             )}
 
-            <Text style={styles.statTitle}>Armor Class</Text>
+            <Text style={styles.statTitle}>Armor</Text>
+            <Text style={styles.statTitle}>Class</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.stats}>
@@ -132,6 +133,7 @@ const styles = StyleSheet.create({
     borderBottomEndRadius: 80,
     borderBottomStartRadius: 80,
     width: "25%",
+    textAlignVertical: "center",
     padding: 5,
     margin: 5,
     alignItems: "center",

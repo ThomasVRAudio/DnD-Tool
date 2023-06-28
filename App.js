@@ -13,6 +13,7 @@ import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CharacterData } from "./Components/Data/CharacterData";
 import SkillsScreen from "./Components/Skills/SkillsScreen";
+import Colors from "./constants/Colors";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -55,8 +56,27 @@ export default function App() {
   const Drawer = createDrawerNavigator();
 
   return (
-    <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Skills">
+    <NavigationContainer
+    >
+      <Drawer.Navigator
+        initialRouteName="Skills"
+        screenOptions={{
+          drawerStyle: { backgroundColor: Colors.header, width: 240 },
+          headerTintColor: { color:  Colors.header },
+          headerStyle: {
+            height: 80,
+            backgroundColor: Colors.header,
+            
+          },
+  
+          headerTitleStyle: {
+            color: "#111111",
+            
+          },
+          drawerActiveBackgroundColor: "#745135",
+          drawerActiveTintColor: "white",
+        }}
+      >
         <Drawer.Screen name="Search Spells" component={SearchScreen} />
         <Drawer.Screen name="Items" component={ItemsScreen} />
         <Drawer.Screen name="Spell Slots" component={SpellSlotsScreen} />
