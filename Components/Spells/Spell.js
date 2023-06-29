@@ -14,7 +14,6 @@ const Spell = ({ data, onPressDelete, index }) => {
   return (
     <ScrollView
       style={styles.container}
-      //onTouchEnd={() => showDetails()}
       showsVerticalScrollIndicator={false}
     >
       <TouchableOpacity onPress={() => showDetails()}>

@@ -66,9 +66,15 @@ const SpellSlotsScreen = () => {
 
   useEffect(() => {
     if (data.length !== 0 && data.error === undefined) {
+      let descText = "";
+
+      data.desc.forEach((element) => {
+        descText += element;
+      });
+
       let newSpell = {
         name: data.name,
-        desc: String(data.desc).replace(/\./g, ".\n\n"),
+        desc: descText.replace(/\./g, ".\n\n"),
         level: data.level,
         components: data.components,
         range: data.range,

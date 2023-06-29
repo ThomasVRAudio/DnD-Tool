@@ -56,22 +56,18 @@ export default function App() {
   const Drawer = createDrawerNavigator();
 
   return (
-    <NavigationContainer
-    >
+    <NavigationContainer>
       <Drawer.Navigator
-        initialRouteName="Skills"
+        initialRouteName="Combat"
         screenOptions={{
           drawerStyle: { backgroundColor: Colors.header, width: 240 },
-          headerTintColor: { color:  Colors.header },
+          headerTintColor: { color: Colors.header },
           headerStyle: {
             height: 80,
             backgroundColor: Colors.header,
-            
           },
-  
           headerTitleStyle: {
             color: "#111111",
-            
           },
           drawerActiveBackgroundColor: "#745135",
           drawerActiveTintColor: "white",
