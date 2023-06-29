@@ -1,4 +1,11 @@
-import { View, Text, StyleSheet, TextInput, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  ScrollView,
+  Keyboard,
+} from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useState, useEffect } from "react";
 import Spell from "./Spell";
@@ -6,11 +13,22 @@ import { LinearGradient } from "expo-linear-gradient";
 import Colors from "../../constants/Colors";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import SpellData from "../Data/spellData";
+import SearchItem from "../Combat/SearchItem";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const SpellSlotsScreen = () => {
   const [data, setData] = useState([]);
   const [search, setSearch] = useState("");
   const [spells, setSpells] = useState([]);
+
+  const [item, setItem] = useState([]);
+  const [searchList, setSearchList] = useState([]);
+
+  const updateSearch = (search) => {
+    setSearch(search);
+  };
+
+  const url = `https://www.dnd5eapi.co/api/spells/`;
 
   useEffect(() => {
     getData();
@@ -22,65 +40,84 @@ const SpellSlotsScreen = () => {
     if (jsonValue != null) {
       setSpells(JSON.parse(jsonValue));
     }
-  };
-
-  const updateSearch = (search) => {
-    setSearch(search);
-  };
-
-  const url = `https://www.dnd5eapi.co/api/spells/${search
-    .toLocaleLowerCase()
-    .trimEnd()
-    .replace(/ /g, "-")
-    .replace(/'/g, "-")}/`;
-
-  const confirm = () => {
-    if (search === "") {
-      return;
-    }
-
-    let localData = SpellData.filter((obj) => {
-      return (
-        obj.index ===
-        search
-          .toLocaleLowerCase()
-          .trimEnd()
-          .replace(/ /g, "-")
-          .replace(/'/g, "-")
-      );
-    });
-
-    if (localData.length !== 0) {
-      setData(localData[0]);
-      setSearch("");
-      return;
-    }
 
     fetch(url)
       .then((resp) => resp.json())
       .then((json) => setData(json))
+      .catch((error) => console.error(error));
+  };
+
+  useEffect(() => {
+    if (!data.results || !search) return;
+
+    let term = search
+      .toLocaleLowerCase()
+      .trimEnd()
+      .replace(/ /g, "-")
+      .replace(/'/g, "-");
+
+    let result = SpellData.filter(({ index }) =>
+      String(index).startsWith(term)
+    );
+
+    if (result.length === 0) {
+      result = data.results.filter(({ index }) =>
+        String(index).startsWith(term)
+      );
+    }
+    let list = [];
+
+    if (!result) return;
+
+    for (let index = 0; index < result.length; index++) {
+      if (index === 3) break;
+
+      const element = result[index];
+      list.push(element);
+    }
+
+    setSearchList(list);
+  }, [search]);
+
+  const confirm = (name) => {
+    setSearchList([]);
+    Keyboard.dismiss();
+
+    if (search === "") {
+      return;
+    }
+
+    let itemUrl =
+      url +
+      String(
+        name.toLocaleLowerCase().trimEnd().replace(/ /g, "-").replace(/'/g, "-")
+      );
+
+    fetch(itemUrl)
+      .then((resp) => resp.json())
+      .then((json) => setItem(json))
       .catch((error) => console.error(error));
 
     setSearch("");
   };
 
   useEffect(() => {
-    if (data.length !== 0 && data.error === undefined) {
+    if (item.length !== 0 && item.error === undefined) {
       let descText = "";
 
-      data.desc.forEach((element) => {
+      item.desc.forEach((element) => {
         descText += element;
       });
 
       let newSpell = {
-        name: data.name,
+        name: item.name,
         desc: descText.replace(/\./g, ".\n\n"),
-        level: data.level,
-        components: data.components,
-        range: data.range,
-        higher_level: data.higher_level,
-        duration: data.duration,
-        casting_time: data.casting_time,
+        level: item.level,
+        components: item.components,
+        range: item.range,
+        higher_level: item.higher_level,
+        duration: item.duration,
+        casting_time: item.casting_time,
       };
       let spellArray = [...spells];
       spellArray.push(newSpell);
@@ -90,8 +127,9 @@ const SpellSlotsScreen = () => {
         .sort();
 
       setSpells(spellArray);
+      setSearchList([]);
     }
-  }, [data]);
+  }, [item]);
 
   const onPressDelete = (index) => {
     let newSpellsList = [...spells];
@@ -166,19 +204,23 @@ const SpellSlotsScreen = () => {
               placeholderTextColor={"#FFFFFF80"}
               onChangeText={updateSearch}
               value={search}
-              onSubmitEditing={confirm}
+              onSubmitEditing={() => confirm(search)}
             ></TextInput>
           </View>
           <View style={styles.rightSearchContainer}>
-            <Ionicons
-              name="add-circle"
-              style={styles.addIcon}
-              size={40}
-              color={"#A39E9E"}
-              onPress={confirm}
-            ></Ionicons>
+            <TouchableOpacity onPress={() => confirm(search)}>
+              <Ionicons
+                name="add-circle"
+                style={styles.addIcon}
+                size={40}
+                color={"#A39E9E"}
+              ></Ionicons>
+            </TouchableOpacity>
           </View>
         </View>
+        {searchList.map((item, index) => {
+          return <SearchItem item={item} key={index} select={confirm} />;
+        })}
       </View>
     </LinearGradient>
   );
