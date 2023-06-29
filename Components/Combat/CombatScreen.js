@@ -15,6 +15,7 @@ export default function CombatScreen({ characterData }) {
 
   const [keyboardStatus, setKeyboardStatus] = useState("");
   const [scrollUpHeight, setScrollUpHeight] = useState(0);
+  const [focusScroll, setFocusScroll] = useState("");
 
   useEffect(() => {
     const showSubscription = Keyboard.addListener("keyboardDidShow", () => {
@@ -34,9 +35,17 @@ export default function CombatScreen({ characterData }) {
 
   useEffect(() => {
     if (keyboardStatus === "Keyboard Shown") {
-      scrollRef.current?.scrollTo({ y: scrollUpHeight, animated: true });
+      if (focusScroll === "weapons") {
+        scrollRef.current?.scrollTo({ y: scrollUpHeight, animated: true });
+      } else {
+        scrollRef.current?.scrollToEnd({ animated: true });
+      }
     }
   }, [keyboardStatus]);
+
+  const moveToEnd = () => {
+    scrollRef.current?.scrollToEnd({ animated: true });
+  };
 
   return (
     <LinearGradient colors={Colors.basicBackground} style={styles.container}>
@@ -45,7 +54,10 @@ export default function CombatScreen({ characterData }) {
         <HitPointSection />
         <View>
           <Text style={styles.sectionTitle}>Weapons</Text>
-          <WeaponSection characterData={characterData} />
+          <WeaponSection
+            setFocusScroll={setFocusScroll}
+            characterData={characterData}
+          />
         </View>
         <Text
           style={styles.sectionTitle}
@@ -59,7 +71,10 @@ export default function CombatScreen({ characterData }) {
         <ArmorSection
           characterData={characterData}
           setArmorClass={setArmorClass}
+          setFocusScroll={setFocusScroll}
+          moveToEnd={moveToEnd}
         />
+        <View style={{ paddingBottom: 60 }}></View>
       </ScrollView>
     </LinearGradient>
   );

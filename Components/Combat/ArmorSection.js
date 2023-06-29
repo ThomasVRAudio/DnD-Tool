@@ -3,12 +3,22 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Armor from "./Armor";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import SearchItem from "./SearchItem";
 
-const ArmorSection = ({ characterData, setArmorClass }) => {
+const ArmorSection = ({
+  characterData,
+  setArmorClass,
+  setFocusScroll,
+  moveToEnd,
+}) => {
   const [search, setSearch] = useState("");
   const [isSearching, setIsSearching] = useState(false);
   const [data, setData] = useState([]);
   const [armor, setArmor] = useState([]);
+
+  const [item, setItem] = useState([]);
+  const [searchList, setSearchList] = useState([]);
 
   const updateSearch = (search) => {
     setSearch(search);
@@ -24,15 +34,46 @@ const ArmorSection = ({ characterData, setArmorClass }) => {
     if (jsonValue != null) {
       setArmor(JSON.parse(jsonValue));
     }
+
+    fetch(url)
+      .then((resp) => resp.json())
+      .then((json) => setData(json))
+      .catch((error) => console.error(error));
   };
 
-  const url = `https://www.dnd5eapi.co/api/equipment/${search
-    .toLocaleLowerCase()
-    .trimEnd()
-    .replace(/ /g, "-")
-    .replace(/'/g, "-")}/`;
+  const url = `https://www.dnd5eapi.co/api/equipment/`;
 
-  const confirm = () => {
+  useEffect(() => {
+    if (!data.results || !search) return;
+
+    let term = search
+      .toLocaleLowerCase()
+      .trimEnd()
+      .replace(/ /g, "-")
+      .replace(/'/g, "-");
+
+    let result = data.results.filter(({ index }) =>
+      String(index).startsWith(term)
+    );
+
+    let list = [];
+
+    if (!result) return;
+
+    for (let index = 0; index < result.length; index++) {
+      if (index === 3) break;
+
+      const element = result[index];
+      list.push(element);
+    }
+
+    setSearchList(list);
+  }, [search]);
+
+  const confirm = (name) => {
+    setIsSearching(false);
+    setSearchList([]);
+
     if (search === "") {
       return;
     }
@@ -42,31 +83,42 @@ const ArmorSection = ({ characterData, setArmorClass }) => {
       .then((json) => setData(json))
       .catch((error) => console.error(error));
 
+    let itemUrl =
+      url +
+      String(
+        name.toLocaleLowerCase().trimEnd().replace(/ /g, "-").replace(/'/g, "-")
+      );
+
+    fetch(itemUrl)
+      .then((resp) => resp.json())
+      .then((json) => setItem(json))
+      .catch((error) => console.error(error));
+
     setSearch("");
-    setIsSearching(false);
   };
 
   useEffect(() => {
     if (
-      data.length === 0 ||
-      data.error !== undefined ||
-      data.equipment_category.index !== "armor"
+      item.length === 0 ||
+      item.error !== undefined ||
+      item.equipment_category.index !== "armor"
     ) {
       return;
     }
 
     let arrayCopy = [...armor];
     let newArmor = {
-      name: data.name,
-      equipment_category: data.equipment_category.index,
-      armor_category: data.armor_category,
-      armor_class_base: data.armor_class.base,
-      armor_class_dex_bonus: data.armor_class.dex_bonus,
-      max_bonus: data.max_bonus,
+      name: item.name,
+      equipment_category: item.equipment_category.index,
+      armor_category: item.armor_category,
+      armor_class_base: item.armor_class.base,
+      armor_class_dex_bonus: item.armor_class.dex_bonus,
+      max_bonus: item.max_bonus,
     };
     arrayCopy.push(newArmor);
     setArmor(arrayCopy);
-  }, [data]);
+    setSearchList([]);
+  }, [item]);
 
   useEffect(() => {
     AsyncStorage.setItem("armor", JSON.stringify(armor));
@@ -125,33 +177,41 @@ const ArmorSection = ({ characterData, setArmorClass }) => {
         );
       })}
       {isSearching ? (
-        <View style={styles.searchContainer}>
-          <View style={styles.leftSearchContainer}>
-            <Ionicons
-              name="search"
-              style={styles.searchIcon}
-              size={20}
-              color={"#A39E9E"}
-            ></Ionicons>
-            <TextInput
-              style={styles.input}
-              placeholder="Chain mail"
-              placeholderTextColor={"#FFFFFF80"}
-              onChangeText={updateSearch}
-              value={search}
-              onSubmitEditing={() => confirm()}
-            ></TextInput>
+        <>
+          <View style={styles.searchContainer}>
+            <View style={styles.leftSearchContainer}>
+              <Ionicons
+                name="search"
+                style={styles.searchIcon}
+                size={20}
+                color={"#A39E9E"}
+              ></Ionicons>
+              <TextInput
+                style={styles.input}
+                placeholder="Chain mail"
+                placeholderTextColor={"#FFFFFF80"}
+                onChangeText={updateSearch}
+                value={search}
+                onSubmitEditing={() => confirm(search)}
+                onFocus={() => setFocusScroll("armor")}
+              ></TextInput>
+            </View>
+            <View style={styles.rightSearchContainer}>
+              <TouchableOpacity onPress={() => confirm(search)}>
+                <Ionicons
+                  name="add-circle"
+                  style={styles.addIcon}
+                  size={40}
+                  color={"#A39E9E"}
+                ></Ionicons>
+              </TouchableOpacity>
+            </View>
           </View>
-          <View style={styles.rightSearchContainer}>
-            <Ionicons
-              name="add-circle"
-              style={styles.addIcon}
-              size={40}
-              color={"#A39E9E"}
-              onPress={() => confirm()}
-            ></Ionicons>
-          </View>
-        </View>
+          <View style={searchList.length === 0 && { padding: 50 }}></View>
+          {searchList.map((item, index) => {
+            return <SearchItem item={item} key={index} select={confirm} />;
+          })}
+        </>
       ) : (
         <View>
           <Ionicons
@@ -160,7 +220,10 @@ const ArmorSection = ({ characterData, setArmorClass }) => {
             size={40}
             color={"#00000093"}
             width="90%"
-            onPress={() => setIsSearching(true)}
+            onPress={() => {
+              setIsSearching(true);
+              moveToEnd();
+            }}
           ></Ionicons>
         </View>
       )}

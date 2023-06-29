@@ -5,10 +5,8 @@ import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import SearchItem from "./SearchItem";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { KeyboardAvoidingView } from "react-native";
-import { Keyboard } from "react-native";
 
-const WeaponSection = ({ characterData }) => {
+const WeaponSection = ({ characterData, setFocusScroll }) => {
   const [search, setSearch] = useState("");
   const [isSearching, setIsSearching] = useState(false);
   const [data, setData] = useState([]);
@@ -166,6 +164,7 @@ const WeaponSection = ({ characterData }) => {
                 onChangeText={updateSearch}
                 value={search}
                 onSubmitEditing={() => confirm(search)}
+                onFocus={() => setFocusScroll("weapons")}
               ></TextInput>
             </View>
             <View style={styles.rightSearchContainer}>
