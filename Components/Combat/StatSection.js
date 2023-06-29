@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const StatSection = ({ characterData, armorClass }) => {
+const StatSection = ({ characterData, armorClass, setFocusScroll }) => {
   const DATA = {
     armor_class: 16,
     armor_class_custom: false,
@@ -61,6 +61,7 @@ const StatSection = ({ characterData, armorClass }) => {
                 onChangeText={(text) =>
                   onConfirm({ value: text, stat: "armor_class" })
                 }
+                onFocus={() => setFocusScroll("stats")}
               />
             ) : (
               <Text style={styles.statScore}>{armorClass}</Text>
@@ -82,6 +83,7 @@ const StatSection = ({ characterData, armorClass }) => {
             defaultValue={String(custom.speed)}
             keyboardType="numeric"
             onChangeText={(text) => onConfirm({ value: text, stat: "speed" })}
+            onFocus={() => setFocusScroll("stats")}
           />
           <Text style={styles.statTitle}>Speed</Text>
         </View>

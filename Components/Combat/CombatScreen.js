@@ -37,7 +37,7 @@ export default function CombatScreen({ characterData }) {
     if (keyboardStatus === "Keyboard Shown") {
       if (focusScroll === "weapons") {
         scrollRef.current?.scrollTo({ y: scrollUpHeight, animated: true });
-      } else {
+      } else if (focusScroll === "armor") {
         scrollRef.current?.scrollToEnd({ animated: true });
       }
     }
@@ -50,8 +50,12 @@ export default function CombatScreen({ characterData }) {
   return (
     <LinearGradient colors={Colors.basicBackground} style={styles.container}>
       <ScrollView ref={scrollRef} showsVerticalScrollIndicator={false}>
-        <StatSection characterData={characterData} armorClass={armorClass} />
-        <HitPointSection />
+        <StatSection
+          characterData={characterData}
+          armorClass={armorClass}
+          setFocusScroll={setFocusScroll}
+        />
+        <HitPointSection setFocusScroll={setFocusScroll} />
         <View>
           <Text style={styles.sectionTitle}>Weapons</Text>
           <WeaponSection

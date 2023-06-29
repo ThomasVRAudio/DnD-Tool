@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-const HitPointSection = () => {
+const HitPointSection = ({ setFocusScroll }) => {
   const DATA = {
     health: "0",
     maxHealth: "0",
@@ -51,6 +51,8 @@ const HitPointSection = () => {
                 onEditData({ value: text, prop: "maxHealth" })
               }
               defaultValue={health.maxHealth}
+              onFocus={() => setFocusScroll("health")}
+              keyboardType="numeric"
             ></TextInput>
           </View>
           <TouchableOpacity
@@ -76,6 +78,8 @@ const HitPointSection = () => {
             style={styles.healthCounter}
             onChangeText={(text) => onEditData({ value: text, prop: "health" })}
             defaultValue={health.health}
+            keyboardType="numeric"
+            onFocus={() => setFocusScroll("health")}
           ></TextInput>
           <TouchableOpacity
             onPress={() =>
@@ -116,6 +120,8 @@ const HitPointSection = () => {
               onEditData({ value: text, prop: "tempHealth" })
             }
             defaultValue={health.tempHealth}
+            keyboardType="numeric"
+            onFocus={() => setFocusScroll("health")}
           ></TextInput>
           <TouchableOpacity
             onPress={() =>
