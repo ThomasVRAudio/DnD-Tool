@@ -49,7 +49,7 @@ export default function CombatScreen({ characterData }) {
 
   return (
     <LinearGradient colors={Colors.basicBackground} style={styles.container}>
-      <ScrollView ref={scrollRef}>
+      <ScrollView ref={scrollRef} showsVerticalScrollIndicator={false}>
         <StatSection characterData={characterData} armorClass={armorClass} />
         <HitPointSection />
         <View>

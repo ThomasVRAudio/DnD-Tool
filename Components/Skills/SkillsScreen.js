@@ -18,7 +18,7 @@ const SkillsScreen = ({
 
   return (
     <LinearGradient style={styles.container} colors={Colors.basicBackground}>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.skillsContainer}>
           <View style={styles.titleSection}>
             <Text style={styles.title}>Saving Throws</Text>

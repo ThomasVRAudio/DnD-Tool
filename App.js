@@ -58,7 +58,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Drawer.Navigator
-        initialRouteName="Spells"
+        initialRouteName="Search Spells"
         screenOptions={{
           drawerStyle: { backgroundColor: Colors.header, width: 240 },
           headerTintColor: { color: Colors.header },
