@@ -9,7 +9,7 @@ const StatSection = ({ characterData, armorClass, setFocusScroll }) => {
   const DATA = {
     armor_class: 16,
     armor_class_custom: false,
-    speed: 45,
+    speed: 30,
   };
 
   const [tapOpen, setTapOpen] = useState(false);

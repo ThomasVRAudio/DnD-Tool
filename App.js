@@ -14,6 +14,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CharacterData } from "./Components/Data/CharacterData";
 import SkillsScreen from "./Components/Skills/SkillsScreen";
 import Colors from "./constants/Colors";
+import { StatusBar } from "expo-status-bar";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -57,8 +58,9 @@ export default function App() {
 
   return (
     <NavigationContainer>
+      <StatusBar backgroundColor={Colors.header} style="dark" />
       <Drawer.Navigator
-        initialRouteName="Search Spells"
+        initialRouteName="Character Info & Stats"
         screenOptions={{
           drawerStyle: { backgroundColor: Colors.header, width: 240 },
           headerTintColor: { color: Colors.header },
@@ -73,10 +75,6 @@ export default function App() {
           drawerActiveTintColor: "white",
         }}
       >
-        <Drawer.Screen name="Search Spells" component={SearchScreen} />
-        <Drawer.Screen name="Items" component={ItemsScreen} />
-        <Drawer.Screen name="Spell Slots" component={SpellSlotsScreen} />
-        <Drawer.Screen name="Spells" component={SpellsScreen} />
         <Drawer.Screen name="Character Info & Stats">
           {() => (
             <InfoStatsScreen
@@ -86,9 +84,6 @@ export default function App() {
               refresh={characterDataRefresh}
             />
           )}
-        </Drawer.Screen>
-        <Drawer.Screen name="Combat">
-          {() => <CombatScreen characterData={characterData} />}
         </Drawer.Screen>
         <Drawer.Screen name="Skills">
           {() => (
@@ -100,6 +95,13 @@ export default function App() {
             />
           )}
         </Drawer.Screen>
+        <Drawer.Screen name="Combat">
+          {() => <CombatScreen characterData={characterData} />}
+        </Drawer.Screen>
+        <Drawer.Screen name="Spells" component={SpellsScreen} />
+        <Drawer.Screen name="Spell Slots" component={SpellSlotsScreen} />
+        <Drawer.Screen name="Items" component={ItemsScreen} />
+        <Drawer.Screen name="Search Spells" component={SearchScreen} />
       </Drawer.Navigator>
     </NavigationContainer>
   );

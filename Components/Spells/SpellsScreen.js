@@ -87,6 +87,13 @@ const SpellSlotsScreen = () => {
       return;
     }
 
+    const localResult = SpellData.find(({ index }) => index === name);
+    if (localResult) {
+      setItem(localResult);
+      setSearch("");
+      return;
+    }
+
     let itemUrl =
       url +
       String(

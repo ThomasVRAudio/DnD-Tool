@@ -13,6 +13,7 @@ import Colors from "../constants/Colors";
 import SpellData from "./Data/spellData";
 import SearchItem from "./Combat/SearchItem";
 import { Keyboard } from "react-native";
+import { StatusBar } from "expo-status-bar";
 
 const SearchScreen = () => {
   const [data, setData] = useState([]);
@@ -75,6 +76,13 @@ const SearchScreen = () => {
     Keyboard.dismiss();
 
     if (search === "") {
+      return;
+    }
+
+    const localResult = SpellData.find(({ index }) => index === name);
+    if (localResult) {
+      setItem(localResult);
+      setSearch("");
       return;
     }
 

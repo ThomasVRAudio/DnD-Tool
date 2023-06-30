@@ -35,16 +35,22 @@ export default function CombatScreen({ characterData }) {
 
   useEffect(() => {
     if (keyboardStatus === "Keyboard Shown") {
-      if (focusScroll === "weapons") {
-        scrollRef.current?.scrollTo({ y: scrollUpHeight, animated: true });
-      } else if (focusScroll === "armor") {
-        scrollRef.current?.scrollToEnd({ animated: true });
-      }
+      moveTo();
     }
   }, [keyboardStatus]);
 
   const moveToEnd = () => {
     scrollRef.current?.scrollToEnd({ animated: true });
+  };
+
+  const moveTo = async () => {
+    setTimeout(() => {
+      if (focusScroll === "weapons") {
+        scrollRef.current?.scrollTo({ y: scrollUpHeight, animated: true });
+      } else if (focusScroll === "armor") {
+        moveToEnd();
+      }
+    }, 200);
   };
 
   return (

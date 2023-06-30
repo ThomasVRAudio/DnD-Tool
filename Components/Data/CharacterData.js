@@ -15,7 +15,7 @@ export const CharacterData = {
     alignment: "alignment",
     exp: 0,
     level: 0,
-    speed: 0,
+    speed: 30,
   },
   saving_throws: {
     strength: false,
