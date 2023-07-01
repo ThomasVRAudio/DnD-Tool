@@ -56,7 +56,7 @@ const Stat = ({
           >
             <Text style={styles.buttonRight}>+</Text>
           </TouchableOpacity>
-          <Text>max: </Text>
+          <Text style={{color: Colors.contrastText}}>max: </Text>
           <TextInput
             style={styles.max}
             defaultValue={maxValue}
@@ -107,11 +107,12 @@ const styles = StyleSheet.create({
   counter: {
     fontFamily: "Serif-Light",
     fontSize: 30,
+    color: Colors.contrastText
   },
   counterzero: {
     fontFamily: "Serif-Light",
     fontSize: 30,
-    color: Colors.textGrayed,
+    color: Colors.contrastTextGrayed,
   },
   counterContainer: {
     flexDirection: "row",
@@ -129,13 +130,16 @@ const styles = StyleSheet.create({
   level: {
     fontFamily: "Serif-Light-Italic",
     fontSize: 20,
+    color: Colors.contrastText
   },
   levelzero: {
     fontFamily: "Serif-Light-Italic",
     fontSize: 20,
-    color: Colors.textGrayed,
+    color: Colors.contrastTextGrayed,
+
   },
   max: {
     fontFamily: "Serif-Light",
+    color: Colors.contrastText
   },
 });

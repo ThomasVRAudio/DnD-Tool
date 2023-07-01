@@ -203,11 +203,11 @@ const styles = StyleSheet.create({
   },
   hpMax: {
     fontFamily: "Serif-Light",
-    color: "#0000008E",
+    color: Colors.textGrayed,
   },
   hpMaxTitle: {
     fontFamily: "Serif-Bold",
-    color: "#0000008E",
+    color: Colors.textGrayed,
   },
   hpTop: {
     flexDirection: "row",

@@ -150,7 +150,7 @@ const SpellSlotsScreen = () => {
   }, [spells]);
 
   return (
-    <LinearGradient colors={Colors.parchmentGradient} style={styles.container}>
+    <LinearGradient colors={Colors.basicBackground} style={styles.container}>
       <View style={styles.container}>
         <ScrollView
           style={styles.spellsContainer}
@@ -202,13 +202,11 @@ const SpellSlotsScreen = () => {
               name="search"
               style={styles.searchIcon}
               size={20}
-              color={"#A39E9E"}
               onPress={confirm}
             ></Ionicons>
             <TextInput
               style={styles.input}
               placeholder="Acid Arrow"
-              placeholderTextColor={"#FFFFFF80"}
               onChangeText={updateSearch}
               value={search}
               onSubmitEditing={() => confirm(search)}
@@ -220,7 +218,6 @@ const SpellSlotsScreen = () => {
                 name="add-circle"
                 style={styles.addIcon}
                 size={40}
-                color={"#A39E9E"}
               ></Ionicons>
             </TouchableOpacity>
           </View>
@@ -252,9 +249,11 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     alignItems: "center",
     marginBottom: 20,
-    backgroundColor: "#2C2929",
     padding: 5,
     marginTop: 10,
+    borderColor: "white",
+    backgroundColor: "white",
+    elevation: 5
   },
   leftSearchContainer: {
     flexDirection: "row",
@@ -268,7 +267,7 @@ const styles = StyleSheet.create({
     textAlign: "right",
   },
   input: {
-    color: "#ffffff",
+
     fontSize: 20,
     paddingLeft: 10,
     paddingHorizontal: 90,
@@ -276,7 +275,7 @@ const styles = StyleSheet.create({
   spellsContainer: { flex: 8 },
   containerTitle: {
     fontFamily: "Serif-Light-Italic",
-    color: "#00000091",
+    color: Colors.text,
     fontSize: 18,
     width: "95%",
     textAlign: "right",

@@ -53,7 +53,9 @@ const Weapon = ({
   };
 
   useEffect(() => {
-    setProficiencyBonus(calculateProficiencyBonus(characterData.character_info.level));
+    setProficiencyBonus(
+      calculateProficiencyBonus(characterData.character_info.level)
+    );
   }, [characterData]);
 
   return (
@@ -98,7 +100,10 @@ const Weapon = ({
           </View>
           <View style={styles.delete}>
             <TouchableOpacity onPress={() => onDelete(index)}>
-              <Ionicons name="trash-outline" size={20}></Ionicons>
+              <Ionicons
+                name="trash-outline"
+                size={20}
+              ></Ionicons>
             </TouchableOpacity>
           </View>
         </View>
@@ -143,7 +148,7 @@ const styles = StyleSheet.create({
     fontFamily: "Serif-Light-Italic",
   },
   drop_down: {
-    backgroundColor: Colors.button,
+    backgroundColor: Colors.buttonTwo,
     borderRadius: 10,
     borderWidth: 1,
     margin: 10,

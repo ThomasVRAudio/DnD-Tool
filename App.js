@@ -62,17 +62,21 @@ export default function App() {
       <Drawer.Navigator
         initialRouteName="Character Info & Stats"
         screenOptions={{
-          drawerStyle: { backgroundColor: Colors.header, width: 240 },
+          drawerStyle: {
+            backgroundColor: Colors.header,
+            width: 240,
+            color: Colors.activeDrawer,
+          },
           headerTintColor: { color: Colors.header },
           headerStyle: {
             height: 80,
             backgroundColor: Colors.header,
           },
           headerTitleStyle: {
-            color: "#111111",
+            color: Colors.text,
           },
-          drawerActiveBackgroundColor: "#745135",
-          drawerActiveTintColor: "white",
+          drawerActiveBackgroundColor: Colors.activeDrawer,
+          drawerActiveTintColor: Colors.contrastText,
         }}
       >
         <Drawer.Screen name="Character Info & Stats">

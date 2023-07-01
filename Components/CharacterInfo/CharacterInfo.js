@@ -127,11 +127,13 @@ const styles = StyleSheet.create({
     fontFamily: "Serif-Bold",
     fontSize: 14,
     textAlign: "left",
+    color: Colors.text
   },
   score: {
     fontFamily: "Serif-Light",
     fontSize: 14,
     textAlign: "left",
+    color: Colors.text
   },
   container: {
     borderWidth: 2,
@@ -141,9 +143,11 @@ const styles = StyleSheet.create({
     width: "95%",
     backgroundColor: Colors.card,
     elevation: 5,
+
   },
   stat: {
     textAlign: "left",
+    
   },
   section: {
     padding: 5,
@@ -157,6 +161,7 @@ const styles = StyleSheet.create({
   },
   lowerPart: {
     justifyContent: "center",
+    
   },
   upperPart: {
     flexDirection: "row",
@@ -166,9 +171,11 @@ const styles = StyleSheet.create({
   nameInput: {
     fontFamily: "Serif-Light",
     fontSize: 16,
+    color: Colors.text
   },
   name: {
     fontFamily: "Serif-Bold",
     fontSize: 16,
+    color: Colors.text
   },
 });

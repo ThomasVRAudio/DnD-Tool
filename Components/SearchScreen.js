@@ -101,7 +101,7 @@ const SearchScreen = () => {
   };
 
   return (
-    <LinearGradient colors={Colors.parchmentGradient} style={styles.container}>
+    <LinearGradient colors={Colors.basicBackground} style={styles.container}>
       <SafeAreaView style={styles.container}>
         <View style={styles.textInputContainer}>
           <TextInput
@@ -180,6 +180,7 @@ const styles = StyleSheet.create({
     fontSize: 60,
     justifyContent: "center",
     fontFamily: "DND-Title",
+    color: Colors.contrastText
   },
   description: {
     textAlign: "justify",
@@ -187,7 +188,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontFamily: "Serif-Light-Italic",
     fontWeight: 600,
-    color: Colors.text,
+    color: Colors.contrastText
   },
   input: {
     fontSize: 20,
@@ -208,6 +209,7 @@ const styles = StyleSheet.create({
   mediumTitle: {
     fontSize: 40,
     fontFamily: "DND-Title",
+    color: Colors.contrastText
   },
   components: {
     flexDirection: "row",
@@ -216,6 +218,7 @@ const styles = StyleSheet.create({
     fontFamily: "Serif-Light",
     fontSize: 15,
     paddingBottom: 2,
+    color: Colors.contrastText
   },
   componentsTitle: {
     flexDirection: "row",
@@ -224,10 +227,11 @@ const styles = StyleSheet.create({
     fontFamily: "Serif-Bold",
     fontSize: 15,
     paddingBottom: 2,
+    color: Colors.contrastText
   },
   level: {
     fontFamily: "Serif-Light-Italic",
     fontSize: 18,
-    color: "#03030373",
+    color: Colors.contrastTextGrayed
   },
 });

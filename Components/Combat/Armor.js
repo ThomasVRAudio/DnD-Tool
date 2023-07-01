@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     fontFamily: "Serif-Light-Italic",
   },
   drop_down: {
-    backgroundColor: Colors.button,
+    backgroundColor: Colors.buttonTwo,
     borderRadius: 10,
     borderWidth: 1,
     margin: 10,

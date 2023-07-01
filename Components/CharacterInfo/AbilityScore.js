@@ -42,12 +42,14 @@ const styles = StyleSheet.create({
   ability: {
     fontFamily: "Serif-Bold",
     fontSize: 14,
+    color: Colors.text
   },
   score: {
     fontFamily: "Serif-Light",
     paddingTop: 10,
     fontSize: 20,
     textAlign: "center",
+    color: Colors.text
   },
   abilityContainer: {
     alignItems: "center",

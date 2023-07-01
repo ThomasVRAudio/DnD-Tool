@@ -177,10 +177,12 @@ const styles = StyleSheet.create({
   },
   passiveTitle: {
     fontFamily: "Serif-Bold",
+    color: Colors.text
   },
   passiveScore: {
     fontFamily: "Serif-Light",
     fontSize: 15,
+    color: Colors.text
   },
   passiveContainerWithCheckTopPart: {
     flexDirection: "row",

@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontFamily: "Serif-Light-Italic",
     fontSize: 30,
-    color: "#0000006C",
+    color: Colors.contrastTextGrayed,
     textAlign: "right",
     width: "90%",
     paddingBottom: 10,

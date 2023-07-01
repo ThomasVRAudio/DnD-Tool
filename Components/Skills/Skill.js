@@ -2,6 +2,7 @@ import { View, StyleSheet, Text } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { calculateProficiencyBonus } from "../../constants/Functions";
+import Colors from "../../constants/Colors";
 
 const Skill = ({
   title,
@@ -83,7 +84,7 @@ const styles = StyleSheet.create({
   },
   abilityName: {
     fontFamily: "Serif-Light",
-    color: "#000000AB",
+    color: Colors.text,
     fontSize: 13,
     textAlignVertical: "center",
     paddingTop: 3,
@@ -95,7 +96,7 @@ const styles = StyleSheet.create({
     fontFamily: "Serif-Light",
     marginLeft: 4,
     marginVertical: 5,
-    backgroundColor: "#F8D5A8",
+    backgroundColor: Colors.skill,
     borderWidth: 1,
     borderRadius: 2,
     padding: 2,

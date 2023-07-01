@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import SearchItem from "./SearchItem";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import Colors from "../../constants/Colors";
 
 const WeaponSection = ({ characterData, setFocusScroll }) => {
   const [search, setSearch] = useState("");
@@ -155,12 +156,10 @@ const WeaponSection = ({ characterData, setFocusScroll }) => {
                 name="search"
                 style={styles.searchIcon}
                 size={20}
-                color={"#A39E9E"}
               ></Ionicons>
               <TextInput
                 style={styles.input}
                 placeholder="Dagger"
-                placeholderTextColor={"#FFFFFF80"}
                 onChangeText={updateSearch}
                 value={search}
                 onSubmitEditing={() => confirm(search)}
@@ -173,7 +172,6 @@ const WeaponSection = ({ characterData, setFocusScroll }) => {
                   name="add-circle"
                   style={styles.addIcon}
                   size={40}
-                  color={"#A39E9E"}
                 ></Ionicons>
               </TouchableOpacity>
             </View>
@@ -189,7 +187,6 @@ const WeaponSection = ({ characterData, setFocusScroll }) => {
             name="add-circle"
             style={styles.addIcon}
             size={40}
-            color={"#00000093"}
             width="90%"
             onPress={() => setIsSearching(true)}
           ></Ionicons>
@@ -209,9 +206,10 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     alignItems: "center",
     marginBottom: 10,
-    backgroundColor: "#2C2929",
+    backgroundColor: "white",
     padding: 5,
     marginTop: 10,
+    elevation: 5,
   },
   leftSearchContainer: {
     flexDirection: "row",
@@ -225,7 +223,6 @@ const styles = StyleSheet.create({
     textAlign: "right",
   },
   input: {
-    color: "#ffffff",
     fontSize: 20,
     paddingLeft: 10,
     paddingHorizontal: 90,

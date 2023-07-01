@@ -95,7 +95,7 @@ const StatSection = ({ characterData, armorClass, setFocusScroll }) => {
             <Ionicons
               name={useCustom ? "radio-button-on" : "radio-button-off"}
               size={15}
-              color={"#000000AD"}
+              color={Colors.textGrayed}
               onPress={() => {
                 onConfirm({ value: !useCustom, stat: "armor_class_custom" });
                 setUseCustom(!useCustom);

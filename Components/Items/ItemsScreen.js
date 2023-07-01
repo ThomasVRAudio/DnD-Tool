@@ -83,7 +83,7 @@ const ItemsScreen = () => {
   }, [itemList]);
 
   return (
-    <LinearGradient colors={Colors.parchmentGradient} style={styles.container}>
+    <LinearGradient colors={Colors.basicBackground} style={styles.container}>
       <ScrollView>
         {itemList.map((item, index) => {
           return (
@@ -112,7 +112,6 @@ const ItemsScreen = () => {
       </Modal>
       <Ionicons
         name="add-circle"
-        color="#745B5B"
         size={80}
         style={styles.createNewButton}
         onPress={() => {
